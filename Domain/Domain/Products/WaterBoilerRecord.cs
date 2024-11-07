@@ -1,8 +1,8 @@
 namespace Domain.Domain.Products;
 
-public class WaterBoiler : Product
+public class WaterBoilerRecord : Product
 {
-    public WaterBoiler(string name, int price, int heatedValue, string material, int maxTemperature) 
+    public WaterBoilerRecord(string name, int price, int heatedValue, string material, int maxTemperature) 
         : base( name, price)
     {
         HeatedValue = heatedValue;

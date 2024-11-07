@@ -1,8 +1,8 @@
 namespace Domain.Domain.Products;
 
-public sealed class Fireplace : Product
+public sealed class FireplaceRecord : Product
 {
-    public Fireplace(string name, int price, int fuelUsage, int fireLevel) 
+    public FireplaceRecord(string name, int price, int fuelUsage, int fireLevel) 
         : base(name, price)
     {
         FuelUsage = fuelUsage;

@@ -11,7 +11,7 @@
           "Application": "1.0.0",
           "AutoMapper": "13.0.1",
           "Domain": "1.0.0",
-          "Microsoft.AspNetCore.OpenApi": "8.0.8",
+          "Microsoft.AspNetCore.OpenApi": "8.0.10",
           "Microsoft.EntityFrameworkCore.Design": "8.0.10",
           "Swashbuckle.AspNetCore": "6.9.0"
         },
@@ -38,14 +38,14 @@
           }
         }
       },
-      "Microsoft.AspNetCore.OpenApi/8.0.8": {
+      "Microsoft.AspNetCore.OpenApi/8.0.10": {
         "dependencies": {
           "Microsoft.OpenApi": "1.6.14"
         },
         "runtime": {
           "lib/net8.0/Microsoft.AspNetCore.OpenApi.dll": {
-            "assemblyVersion": "8.0.8.0",
-            "fileVersion": "8.0.824.36908"
+            "assemblyVersion": "8.0.10.0",
+            "fileVersion": "8.0.1024.46804"
           }
         }
       },
@@ -588,6 +588,10 @@
       "System.Threading.Channels/6.0.0": {},
       "Application/1.0.0": {
         "dependencies": {
+          "AutoMapper": "13.0.1",
+          "Domain": "1.0.0",
+          "Microsoft.AspNetCore.OpenApi": "8.0.10",
+          "Repository": "1.0.0",
           "Swashbuckle.AspNetCore": "6.9.0"
         },
         "runtime": {
@@ -604,6 +608,17 @@
         },
         "runtime": {
           "Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Repository/1.0.0": {
+        "dependencies": {
+          "Domain": "1.0.0"
+        },
+        "runtime": {
+          "Repository.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -631,12 +646,12 @@
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.OpenApi/8.0.8": {
+    "Microsoft.AspNetCore.OpenApi/8.0.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wNHhohqP8rmsQ4UhKbd6jZMD6l+2Q/+DvRBT0Cgqeuglr13aF6sSJWicZKCIhZAUXzuhkdwtHVc95MlPlFk0dA==",
-      "path": "microsoft.aspnetcore.openapi/8.0.8",
-      "hashPath": "microsoft.aspnetcore.openapi.8.0.8.nupkg.sha512"
+      "sha512": "sha512-kzYiW/IbSN0xittjplA8eN1wrNcRi3DMalYRrEuF2xyf2Y5u7cGCfgN1oNZ+g3aBQzMKTQwYsY1PeNmC+P0WnA==",
+      "path": "microsoft.aspnetcore.openapi/8.0.10",
+      "hashPath": "microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
       "type": "package",
@@ -945,6 +960,11 @@
       "sha512": ""
     },
     "Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Repository/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

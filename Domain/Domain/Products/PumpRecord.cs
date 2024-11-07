@@ -1,8 +1,8 @@
 namespace Domain.Domain.Products;
 
-public sealed class Pump : Product
+public class PumpRecord : Product
 {
-    public Pump(string name, int price, string brand, int pressure, int powerSupply, string? imagePath) 
+    public PumpRecord(string name, int price, string brand, int pressure, int powerSupply, string? imagePath) 
         : base(name, price)
     {
         Brand = brand;
@@ -15,6 +15,4 @@ public sealed class Pump : Product
     public int Pressure { get; set; }
     
     public int PowerSupply { get; set; }
-    
-    public string? ImagePath { get; set; }
 }

@@ -2,7 +2,7 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Web.Infrastructure;
 
-public static class StaticFileConfiguration
+public static class ServiceCollectionExtension
 {
     public static void ConfigureStaticFilesUpload(this IApplicationBuilder app)
     {

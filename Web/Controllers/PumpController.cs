@@ -1,4 +1,6 @@
 using Application.Infrastructure.Images;
+using Application.Pump;
+using Application.Pump.Models;
 using AutoMapper;
 using Domain;
 using Domain.Domain.Products;
@@ -15,51 +17,46 @@ namespace Web.Controllers
     public class PumpController : Controller
     {
         private readonly FahrenheitContext _context;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
         private readonly IImageService _imageService;
+        private readonly IPumpService _pumpService;
         
         
-        public PumpController(FahrenheitContext context, IMapper mapper, IImageService imageService)
+        public PumpController(FahrenheitContext context, IMapper mapper, IImageService imageService, IPumpService pumpService)
         {
             _context = context;
-            this.mapper = mapper;
+            _mapper = mapper;
             _imageService = imageService;
+            _pumpService = pumpService;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync([FromForm] CreatePumpRequest request, IFormFile imageFile)
         {
-            // Validate request data
             if (imageFile == null)
             {
                 return BadRequest("Image file is required.");
             }
-            
-            var pump = mapper.Map<Pump>(request);
-            
-            pump.ImagePath = await _imageService.SaveImageLocallyAsync(imageFile, "pumps");
 
-            // Add and save the new pump entity to the database
-            var result = await _context.Pumps.AddAsync(pump);
-            await _context.SaveChangesAsync();
+            var result = await _pumpService.AddAsync(_mapper.Map<AddPumpModel>(request), imageFile);
 
-            // Return the created Pump with its image path
-            return Created($"{Request.Path}/{result.Entity.Id}", mapper.Map<PumpResponse>(result.Entity));
+            var entity = await _pumpService.GetByIdAsync(result);
+            return Created($"{Request.Path}/{result}", _mapper.Map<PumpResponse>(entity));
         }
 
         
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            return Ok(mapper.Map<PumpResponse>(await _context.Pumps.FirstOrDefaultAsync(e => e.Id == id)));
+            return Ok(_mapper.Map<PumpResponse>(await _context.Pumps.FirstOrDefaultAsync(e => e.Id == id)));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
             var result =
-                mapper.Map<IReadOnlyCollection<PumpResponse>>(await _context.Pumps.Skip((int)offset).Take((int)limit)
+                _mapper.Map<IReadOnlyCollection<PumpResponse>>(await _context.Pumps.Skip((int)offset).Take((int)limit)
                     .ToListAsync());
 
             return Ok(new GetAllResponse<PumpResponse>(result, result.Count));
@@ -73,13 +70,13 @@ namespace Web.Controllers
             var entity = await _context.Pumps.FirstOrDefaultAsync(e => e.Id == request.Id)
                          ?? throw new Exception("Pump to update not found");
 
-            mapper.Map(request, entity);
+            _mapper.Map(request, entity);
 
             _context.Pumps.Update(entity);
 
             await _context.SaveChangesAsync();
 
-            return Ok(mapper.Map<UpdatedResponse>(entity));
+            return Ok(_mapper.Map<UpdatedResponse>(entity));
         }
         
         [HttpDelete]

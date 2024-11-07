@@ -1,7 +1,9 @@
+using System.Reflection;
 using Application.Infrastructure;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Repository.Infrastructure;
 using Web;
 using Web.Infrastructure;
 
@@ -13,7 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddBusinessServices();
 builder.Services.AddControllers();
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddRepositories();
 builder.Services.AddDbContext<FahrenheitContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Psql")));
 

@@ -34,17 +34,14 @@ namespace Domain.Migrations
                     b.Property<int>("FuelUsage")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("integer");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Price")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Width")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -62,9 +59,6 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("integer");
-
                     b.Property<string>("ImagePath")
                         .HasColumnType("text");
 
@@ -81,9 +75,6 @@ namespace Domain.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Width")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.ToTable("Pumps");
@@ -98,8 +89,8 @@ namespace Domain.Migrations
                     b.Property<double>("HeatedValue")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("integer");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
 
                     b.Property<string>("Material")
                         .IsRequired()
@@ -110,9 +101,6 @@ namespace Domain.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("Price")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Width")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -129,8 +117,8 @@ namespace Domain.Migrations
                     b.Property<int>("HeatedValue")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("integer");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
 
                     b.Property<string>("Material")
                         .IsRequired()
@@ -144,9 +132,6 @@ namespace Domain.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("Price")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Width")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");

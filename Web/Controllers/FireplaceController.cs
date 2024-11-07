@@ -26,7 +26,7 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync(CreateFireplaceRequest request)
         {
-            var result = await _context.Fireplaces.AddAsync(mapper.Map<Fireplace>(request));
+            var result = await _context.Fireplaces.AddAsync(mapper.Map<FireplaceRecord>(request));
             await _context.SaveChangesAsync();
 
             return Created($"{Request.Path}", 

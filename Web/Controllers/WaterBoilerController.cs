@@ -26,7 +26,7 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync(CreateWaterBoilerRequest request)
         {
-            var result = await _context.WaterBoilers.AddAsync(mapper.Map<WaterBoiler>(request));
+            var result = await _context.WaterBoilers.AddAsync(mapper.Map<WaterBoilerRecord>(request));
             await _context.SaveChangesAsync();
 
             return Created($"{Request.Path}", 

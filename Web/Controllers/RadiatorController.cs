@@ -26,7 +26,7 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync(CreateRadiatorRequest request)
         {
-            var result = await _context.Radiators.AddAsync(mapper.Map<Radiator>(request));
+            var result = await _context.Radiators.AddAsync(mapper.Map<RadiatorRecord>(request));
             await _context.SaveChangesAsync();
 
             return Created($"{Request.Path}", 

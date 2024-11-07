@@ -16,11 +16,11 @@ public class FahrenheitContext : DbContext
     
     public DbSet<Feedback> Feedbacks => Set<Feedback>();
     
-    public DbSet<Fireplace> Fireplaces => Set<Fireplace>();
+    public DbSet<FireplaceRecord> Fireplaces => Set<FireplaceRecord>();
     
-    public DbSet<Pump> Pumps => Set<Pump>();
+    public DbSet<PumpRecord> Pumps => Set<PumpRecord>();
     
-    public DbSet<Radiator> Radiators => Set<Radiator>();
+    public DbSet<RadiatorRecord> Radiators => Set<RadiatorRecord>();
     
-    public DbSet<WaterBoiler> WaterBoilers => Set<WaterBoiler>();
+    public DbSet<WaterBoilerRecord> WaterBoilers => Set<WaterBoilerRecord>();
 }

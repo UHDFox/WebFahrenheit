@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "HT5Gx0/1dLX83OV2xF49ByOLObO0NqguaWpZsBuiFCciNO1wyq9V2bvvJrmHn9NpbHUgD73MzV1hzF3ifW9rVg==",
+  "dgSpecHash": "bF19A+UX6z8FaA9KOA46nd1GlcNwIMaBSKK6Zp/TsmNMnFMMCNXfqhtG/bVQRrwx1nv7+nboF6jbxaMeXsb6Fg==",
   "success": true,
   "projectFilePath": "D:\\progs\\projects\\WebFahrenheit\\Web\\Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\000\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\000\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.8\\microsoft.aspnetcore.openapi.8.0.8.nupkg.sha512",
+    "C:\\Users\\000\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.10\\microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.codeanalysis.common\\4.5.0\\microsoft.codeanalysis.common.4.5.0.nupkg.sha512",

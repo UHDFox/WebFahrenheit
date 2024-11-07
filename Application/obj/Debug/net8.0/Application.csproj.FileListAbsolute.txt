@@ -10,3 +10,9 @@ D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.dll
 D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\refint\Application.dll
 D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.pdb
 D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\ref\Application.dll
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.sourcelink.json
+D:\progs\projects\WebFahrenheit\Application\bin\Debug\net8.0\Domain.dll
+D:\progs\projects\WebFahrenheit\Application\bin\Debug\net8.0\Repository.dll
+D:\progs\projects\WebFahrenheit\Application\bin\Debug\net8.0\Domain.pdb
+D:\progs\projects\WebFahrenheit\Application\bin\Debug\net8.0\Repository.pdb
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Applicat.44B5EDA2.Up2Date
