@@ -1,0 +1,12 @@
+D:\progs\projects\WebFahrenheit\Application\bin\Debug\net8.0\Application.deps.json
+D:\progs\projects\WebFahrenheit\Application\bin\Debug\net8.0\Application.dll
+D:\progs\projects\WebFahrenheit\Application\bin\Debug\net8.0\Application.pdb
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.dll
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\refint\Application.dll
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\Application.pdb
+D:\progs\projects\WebFahrenheit\Application\obj\Debug\net8.0\ref\Application.dll
