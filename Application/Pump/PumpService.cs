@@ -20,7 +20,7 @@ internal sealed class PumpService : IPumpService
         this._imageService = _imageService;
     }
 
-    public async Task<IReadOnlyCollection<GetPumpModel>> GetAllAsync(int offset, int limit)
+    public async Task<IReadOnlyCollection<GetPumpModel>> GetListAsync(int offset, int limit)
     {
         var totalAmount = await repository.GetTotalAmountAsync();
 
@@ -50,29 +50,37 @@ internal sealed class PumpService : IPumpService
     {
         var entity = await repository.GetByIdAsync(model.Id)
                      ?? throw new Exception("Pump entity not found");
-
-        // Map properties from model to the entity
+        
         mapper.Map(model, entity);
-
-        // If a new image file is provided, save it and update the ImagePath
+        
         if (imageFile != null)
         {
-            entity.ImagePath = await _imageService.SaveImageLocallyAsync(imageFile, "pumps");
+            entity.ImagePath = await _imageService.UpdateImageAsync(imageFile, "pumps", entity.ImagePath);
         }
 
-        // Update the entity in the repository
         repository.Update(entity);
-
-        // Save changes to the database
+        
         await repository.SaveChangesAsync();
 
         return model;
-
     }
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        await GetByIdAsync(id); //to check if such an entity exists
-        return await repository.DeleteAsync(id);
+        var entity = await repository.GetByIdAsync(id);
+        if (entity == null)
+            throw new Exception("Entity not found");
+
+        // Delete the image associated with this entity, if it exists
+        if (!string.IsNullOrEmpty(entity.ImagePath))
+        {
+            await _imageService.DeleteImageAsync(entity.ImagePath);
+        }
+
+        // Delete the entity from the repository
+        var result = await repository.DeleteAsync(id);
+        await repository.SaveChangesAsync();
+
+        return result;
     }
 }

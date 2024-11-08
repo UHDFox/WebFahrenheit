@@ -5,7 +5,7 @@ namespace Application.Pump;
 
 public interface IPumpService
 {
-    Task<IReadOnlyCollection<GetPumpModel>> GetAllAsync(int offset, int limit);
+    Task<IReadOnlyCollection<GetPumpModel>> GetListAsync(int offset, int limit);
 
     Task<GetPumpModel> GetByIdAsync(Guid id);
 

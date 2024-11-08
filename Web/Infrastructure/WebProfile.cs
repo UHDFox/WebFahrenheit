@@ -53,6 +53,8 @@ public class WebProfile : Profile
             .ConstructUsing(src => new PumpRecord(src.Name, src.Price, src.Brand, src.Pressure, src.PowerSupply, null));*/
        CreateMap<CreatePumpRequest, AddPumpModel>();
        CreateMap<GetPumpModel, PumpResponse>();
+       CreateMap<UpdatePumpRequest, UpdatePumpModel>();
+       CreateMap<UpdatePumpModel, PumpResponse>().ReverseMap();
     }
     
 }

@@ -49,44 +49,33 @@ namespace Web.Controllers
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            return Ok(_mapper.Map<PumpResponse>(await _context.Pumps.FirstOrDefaultAsync(e => e.Id == id)));
+            var result = await _pumpService.GetByIdAsync(id);
+            
+            return Ok(_mapper.Map<PumpResponse>(result));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
-            var result =
-                _mapper.Map<IReadOnlyCollection<PumpResponse>>(await _context.Pumps.Skip((int)offset).Take((int)limit)
-                    .ToListAsync());
-
-            return Ok(new GetAllResponse<PumpResponse>(result, result.Count));
+            var result = await _pumpService.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
+            return Ok(new GetAllResponse<PumpResponse>(_mapper.Map<IReadOnlyCollection<PumpResponse>>(result),
+                result.Count));
         }
         
 
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync(UpdatePumpRequest request)
+        public async Task<ActionResult> UpdateAsync([FromForm]UpdatePumpRequest request, IFormFile? imageFile)
         {
-            var entity = await _context.Pumps.FirstOrDefaultAsync(e => e.Id == request.Id)
-                         ?? throw new Exception("Pump to update not found");
+            var entity = await _pumpService.UpdateAsync(_mapper.Map<UpdatePumpModel>(request), imageFile);
 
-            _mapper.Map(request, entity);
-
-            _context.Pumps.Update(entity);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(_mapper.Map<UpdatedResponse>(entity));
+            return Ok(new UpdatedResponse(entity.Id));
         }
         
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var entity = await _context.Pumps.FirstOrDefaultAsync(e => e.Id == id)
-                         ?? throw new Exception("Pump to delete not found");
-
-            _context.Pumps.Remove(entity);
-            var result = await _context.SaveChangesAsync() > 0;
+            var result = await _pumpService.DeleteAsync(id);
             
             return Ok(new DeletedResponse(id, result));
         }

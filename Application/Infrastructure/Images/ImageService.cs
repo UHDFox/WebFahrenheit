@@ -27,5 +27,39 @@ public sealed class ImageService : IImageService
         
         return Path.Combine("/", _baseUploadsFolder, bucket, uniqueFileName).Replace("\\", "/");
     }
+   
+
+    public async Task<string> UpdateImageAsync(IFormFile newImageFile, string bucket, string? existingImagePath = null)
+    {
+        if (!string.IsNullOrEmpty(existingImagePath))
+        {
+            await DeleteImageAsync(existingImagePath);
+        }
+        
+        return await SaveImageLocallyAsync(newImageFile, bucket);
+    }
+    
+    public Task<bool> DeleteImageAsync(string imagePath)
+    {
+        try
+        {
+            // Combine the base directory with the relative image path
+            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), imagePath.TrimStart('/'));
+                
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+                return Task.FromResult(true);
+            }
+                
+            return Task.FromResult(false);
+        }
+        catch (Exception)
+        {
+            // Log error if needed
+            return Task.FromResult(false);
+        }
+    }
+
 }
 
