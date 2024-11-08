@@ -15,10 +15,10 @@ public sealed class FireplaceResponse
     public string Name { get; set; }
     
     public int Price { get; set; }
-    
+
     public int FuelUsage { get; set; }
-    
+
     public int FireLevel { get; set; }
-    
+
     public string? ImagePath { get; set; }
 }

@@ -1,5 +1,6 @@
 using Application.Fireplace.Models;
 using Application.Pump.Models;
+using Application.Radiator.Models;
 using Application.WaterBoiler.Models;
 using AutoMapper;
 using Domain.Domain.Products;
@@ -11,7 +12,9 @@ using Web.Contracts.Requests.Fireplace;
 using Web.Contracts.Requests.Fireplace.Requests;
 using Web.Contracts.Requests.Pump;
 using Web.Contracts.Requests.Radiator;
+using Web.Contracts.Requests.Radiator.Requests;
 using Web.Contracts.Requests.Waterboiler;
+using Web.Contracts.Requests.Waterboiler.Requests;
 
 namespace Web.Infrastructure;
 
@@ -67,5 +70,10 @@ public class WebProfile : Profile
        CreateMap<GetWaterBoilerModel, WaterBoilerResponse>();
        CreateMap<UpdateWaterBoilerRequest, UpdateWaterBoilerModel>();
        CreateMap<UpdateWaterBoilerModel, WaterBoilerResponse>().ReverseMap();
+       
+       CreateMap<CreateRadiatorRequest, AddRadiatorModel>();
+       CreateMap<GetRadiatorModel, RadiatorResponse>();
+       CreateMap<UpdateRadiatorRequest, UpdateRadiatorModel>();
+       CreateMap<UpdateRadiatorModel, RadiatorResponse>().ReverseMap();
     }
 }

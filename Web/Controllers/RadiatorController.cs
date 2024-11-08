@@ -1,10 +1,10 @@
+using Application.Radiator;
+using Application.Radiator.Models;
 using AutoMapper;
-using Domain;
-using Domain.Domain.Products;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Radiator;
+using Web.Contracts.Requests.Radiator.Requests;
 
 namespace Web.Controllers
 {
@@ -12,68 +12,62 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class RadiatorController : Controller
     {
-        private readonly FahrenheitContext _context;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
+        private readonly IRadiatorService _radiatorService;
         
         
-        public RadiatorController(FahrenheitContext context, IMapper mapper)
+        public RadiatorController(IMapper mapper, IRadiatorService radiatorService)
         {
-            _context = context;
-            this.mapper = mapper;
+            _mapper = mapper;
+            _radiatorService = radiatorService;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> AddAsync(CreateRadiatorRequest request)
+        public async Task<ActionResult<Guid>> AddAsync([FromForm] CreateRadiatorRequest request, IFormFile imageFile)
         {
-            var result = await _context.Radiators.AddAsync(mapper.Map<RadiatorRecord>(request));
-            await _context.SaveChangesAsync();
+            if (imageFile == null)
+            {
+                return BadRequest("Image file is required.");
+            }
 
-            return Created($"{Request.Path}", 
-                mapper.Map<RadiatorResponse>(await _context.Radiators.FirstOrDefaultAsync(e => e.Id == result.Entity.Id)));
+            var result = await _radiatorService.AddAsync(_mapper.Map<AddRadiatorModel>(request), imageFile);
+
+            var entity = await _radiatorService.GetByIdAsync(result);
+            return Created($"{Request.Path}/{result}", _mapper.Map<RadiatorResponse>(entity));
         }
+
         
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            return Ok(mapper.Map<RadiatorResponse>(await _context.Radiators.FirstOrDefaultAsync(e => e.Id == id)));
+            var result = await _radiatorService.GetByIdAsync(id);
+            
+            return Ok(_mapper.Map<RadiatorResponse>(result));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
-            var result =
-                mapper.Map<IReadOnlyCollection<RadiatorResponse>>(await _context.Radiators.Skip((int)offset).Take((int)limit)
-                    .ToListAsync());
-
-            return Ok(new GetAllResponse<RadiatorResponse>(result, result.Count));
+            var result = await _radiatorService.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
+            return Ok(new GetAllResponse<RadiatorResponse>(_mapper.Map<IReadOnlyCollection<RadiatorResponse>>(result),
+                result.Count));
         }
         
 
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync(UpdateRadiatorRequest request)
+        public async Task<ActionResult> UpdateAsync([FromForm]UpdateRadiatorRequest request, IFormFile? imageFile)
         {
-            var entity = await _context.Radiators.FirstOrDefaultAsync(e => e.Id == request.Id)
-                         ?? throw new Exception("Radiator to update not found");
+            var entity = await _radiatorService.UpdateAsync(_mapper.Map<UpdateRadiatorModel>(request), imageFile);
 
-            mapper.Map(request, entity);
-
-            _context.Radiators.Update(entity);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(mapper.Map<UpdatedResponse>(entity));
+            return Ok(new UpdatedResponse(entity.Id));
         }
         
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var entity = await _context.Radiators.FirstOrDefaultAsync(e => e.Id == id)
-                         ?? throw new Exception("Radiator to delete not found");
-
-            _context.Radiators.Remove(entity);
-            var result = await _context.SaveChangesAsync() > 0;
+            var result = await _radiatorService.DeleteAsync(id);
             
             return Ok(new DeletedResponse(id, result));
         }

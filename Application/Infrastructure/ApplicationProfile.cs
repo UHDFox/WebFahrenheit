@@ -1,6 +1,7 @@
 using Application.Fireplace.Models;
 using Application.Pump;
 using Application.Pump.Models;
+using Application.Radiator.Models;
 using Application.WaterBoiler.Models;
 using AutoMapper;
 using Domain.Domain.Products;
@@ -30,5 +31,9 @@ public class ApplicationProfile : Profile
         CreateMap<UpdateWaterBoilerModel, WaterBoilerRecord>().ReverseMap();
         CreateMap<GetWaterBoilerModel, WaterBoilerRecord>().ReverseMap();
         CreateMap<AddWaterBoilerModel, WaterBoilerRecord>();
+        
+        CreateMap<UpdateRadiatorModel, RadiatorRecord>().ReverseMap();
+        CreateMap<GetRadiatorModel, RadiatorRecord>().ReverseMap();
+        CreateMap<AddRadiatorModel, RadiatorRecord>();
     }
 }

@@ -1,4 +1,4 @@
-namespace Web.Contracts.Requests.Waterboiler;
+namespace Web.Contracts.Requests.Waterboiler.Requests;
 
 public sealed class CreateWaterBoilerRequest
 {

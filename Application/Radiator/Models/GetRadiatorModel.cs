@@ -1,8 +1,8 @@
-namespace Web.Contracts.Requests.Radiator;
+namespace Application.Radiator.Models;
 
-public class RadiatorResponse
+public sealed class GetRadiatorModel
 {
-    public RadiatorResponse(Guid id, string name, int price, double heatedValue, string material, string? imagePath)
+    public GetRadiatorModel(Guid id, string name, int price, double heatedValue, string material, string? imagePath)
     {
         Id = id;
         Name = name;
@@ -12,7 +12,8 @@ public class RadiatorResponse
         ImagePath = imagePath;
     }
     public Guid Id { get; set; }
-    public string Name { get; set; }
+    
+    public string? Name { get; set; }
     
     public int Price { get; set; }
     

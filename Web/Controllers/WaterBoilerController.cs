@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Waterboiler;
+using Web.Contracts.Requests.Waterboiler.Requests;
 
 namespace Web.Controllers
 {

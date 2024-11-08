@@ -1,6 +1,7 @@
 using Application.Fireplace;
 using Application.Infrastructure.Images;
 using Application.Pump;
+using Application.Radiator;
 using Application.WaterBoiler;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,7 @@ public static class ServiceCollectionExtension
         services.AddTransient<IPumpService, PumpService>();
         services.AddTransient<IFireplaceService, FireplaceService>();
         services.AddTransient<IWaterBoilerService, WaterBoilerService>();
+        services.AddTransient<IRadiatorService, RadiatorService>();
         
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }

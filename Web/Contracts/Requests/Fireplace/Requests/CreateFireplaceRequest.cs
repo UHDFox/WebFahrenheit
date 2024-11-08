@@ -1,4 +1,4 @@
-namespace Web.Contracts.Requests.Fireplace;
+namespace Web.Contracts.Requests.Fireplace.Requests;
 
 public sealed class CreateFireplaceRequest
 {
