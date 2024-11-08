@@ -1,4 +1,4 @@
-using Application.Pump;
+using Application.Fireplace.Models;
 using Application.Pump.Models;
 using AutoMapper;
 using Domain.Domain.Products;
@@ -7,6 +7,7 @@ using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Client;
 using Web.Contracts.Requests.Feedback;
 using Web.Contracts.Requests.Fireplace;
+using Web.Contracts.Requests.Fireplace.Requests;
 using Web.Contracts.Requests.Pump;
 using Web.Contracts.Requests.Radiator;
 using Web.Contracts.Requests.Waterboiler;
@@ -55,6 +56,11 @@ public class WebProfile : Profile
        CreateMap<GetPumpModel, PumpResponse>();
        CreateMap<UpdatePumpRequest, UpdatePumpModel>();
        CreateMap<UpdatePumpModel, PumpResponse>().ReverseMap();
+       
+       CreateMap<CreateFireplaceRequest, AddFireplaceModel>();
+       CreateMap<GetFireplaceModel, FireplaceResponse>();
+       CreateMap<UpdateFireplaceRequest, UpdateFireplaceModel>();
+       CreateMap<UpdateFireplaceModel, FireplaceResponse>().ReverseMap();
     }
     
 }

@@ -1,3 +1,4 @@
+using Application.Fireplace;
 using Application.Infrastructure.Images;
 using Application.Pump;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ public static class ServiceCollectionExtension
     {
         services.AddTransient<IImageService, ImageService>();
         services.AddTransient<IPumpService, PumpService>();
+        services.AddTransient<IFireplaceService, FireplaceService>();
         
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }

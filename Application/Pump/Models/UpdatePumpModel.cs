@@ -13,6 +13,4 @@ public sealed class UpdatePumpModel
     public int Pressure { get; set; }
     
     public int PowerSupply { get; set; }
-
-    private string? ImagePath { get; set; }
 }

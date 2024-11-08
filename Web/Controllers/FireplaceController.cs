@@ -1,10 +1,10 @@
+using Application.Fireplace;
+using Application.Fireplace.Models;
 using AutoMapper;
-using Domain;
-using Domain.Domain.Products;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Fireplace;
+using Web.Contracts.Requests.Fireplace.Requests;
 
 namespace Web.Controllers
 {
@@ -12,68 +12,62 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class FireplaceController : Controller
     {
-        private readonly FahrenheitContext _context;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
+        private readonly IFireplaceService _fireplaceService;
         
         
-        public FireplaceController(FahrenheitContext context, IMapper mapper)
+        public FireplaceController(IMapper mapper, IFireplaceService fireplaceService)
         {
-            _context = context;
-            this.mapper = mapper;
+            _mapper = mapper;
+            _fireplaceService = fireplaceService;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> AddAsync(CreateFireplaceRequest request)
+        public async Task<ActionResult<Guid>> AddAsync([FromForm] CreateFireplaceRequest request, IFormFile imageFile)
         {
-            var result = await _context.Fireplaces.AddAsync(mapper.Map<FireplaceRecord>(request));
-            await _context.SaveChangesAsync();
+            if (imageFile == null)
+            {
+                return BadRequest("Image file is required.");
+            }
 
-            return Created($"{Request.Path}", 
-                mapper.Map<FireplaceResponse>(await _context.Fireplaces.FirstOrDefaultAsync(e => e.Id == result.Entity.Id)));
+            var result = await _fireplaceService.AddAsync(_mapper.Map<AddFireplaceModel>(request), imageFile);
+
+            var entity = await _fireplaceService.GetByIdAsync(result);
+            return Created($"{Request.Path}/{result}", _mapper.Map<FireplaceResponse>(entity));
         }
+
         
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            return Ok(mapper.Map<FireplaceResponse>(await _context.Fireplaces.FirstOrDefaultAsync(e => e.Id == id)));
+            var result = await _fireplaceService.GetByIdAsync(id);
+            
+            return Ok(_mapper.Map<FireplaceResponse>(result));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
-            var result =
-                mapper.Map<IReadOnlyCollection<FireplaceResponse>>(await _context.Fireplaces.Skip((int)offset).Take((int)limit)
-                    .ToListAsync());
-
-            return Ok(new GetAllResponse<FireplaceResponse>(result, result.Count));
+            var result = await _fireplaceService.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
+            return Ok(new GetAllResponse<FireplaceResponse>(_mapper.Map<IReadOnlyCollection<FireplaceResponse>>(result),
+                result.Count));
         }
         
 
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync(UpdateFireplaceRequest request)
+        public async Task<ActionResult> UpdateAsync([FromForm]UpdateFireplaceRequest request, IFormFile? imageFile)
         {
-            var entity = await _context.Fireplaces.FirstOrDefaultAsync(e => e.Id == request.Id)
-                         ?? throw new Exception("Fireplace to update not found");
+            var entity = await _fireplaceService.UpdateAsync(_mapper.Map<UpdateFireplaceModel>(request), imageFile);
 
-            mapper.Map(request, entity);
-
-            _context.Fireplaces.Update(entity);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(mapper.Map<UpdatedResponse>(entity));
+            return Ok(new UpdatedResponse(entity.Id));
         }
         
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var entity = await _context.Fireplaces.FirstOrDefaultAsync(e => e.Id == id)
-                         ?? throw new Exception("Fireplace to delete not found");
-
-            _context.Fireplaces.Remove(entity);
-            var result = await _context.SaveChangesAsync() > 0;
+            var result = await _fireplaceService.DeleteAsync(id);
             
             return Ok(new DeletedResponse(id, result));
         }

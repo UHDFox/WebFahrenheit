@@ -1,18 +1,20 @@
-namespace Web.Contracts.Requests.Fireplace;
+namespace Application.Fireplace.Models;
 
-public sealed class FireplaceResponse
+public sealed class GetFireplaceModel
 {
-    public FireplaceResponse(Guid id, string name, int price, int fuelUsage, int fireLevel)
+    public GetFireplaceModel(Guid id, string name, int price, int fuelUsage, int fireLevel, string? imagePath)
     {
         Id = id;
         Name = name;
         Price = price;
         FuelUsage = fuelUsage;
         FireLevel = fireLevel;
+        ImagePath = imagePath;
     }
+    
     public Guid Id { get; set; }
     
-    public string Name { get; set; }
+    public string? Name { get; set; }
     
     public int Price { get; set; }
     

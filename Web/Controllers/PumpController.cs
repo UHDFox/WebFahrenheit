@@ -2,13 +2,9 @@ using Application.Infrastructure.Images;
 using Application.Pump;
 using Application.Pump.Models;
 using AutoMapper;
-using Domain;
-using Domain.Domain.Products;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Pump;
-using Web.Infrastructure;
 
 namespace Web.Controllers
 {
@@ -16,17 +12,13 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class PumpController : Controller
     {
-        private readonly FahrenheitContext _context;
         private readonly IMapper _mapper;
-        private readonly IImageService _imageService;
         private readonly IPumpService _pumpService;
         
         
-        public PumpController(FahrenheitContext context, IMapper mapper, IImageService imageService, IPumpService pumpService)
+        public PumpController(IMapper mapper, IPumpService pumpService)
         {
-            _context = context;
             _mapper = mapper;
-            _imageService = imageService;
             _pumpService = pumpService;
         }
 

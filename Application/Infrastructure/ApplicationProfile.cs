@@ -1,3 +1,4 @@
+using Application.Fireplace.Models;
 using Application.Pump;
 using Application.Pump.Models;
 using AutoMapper;
@@ -20,5 +21,9 @@ public class ApplicationProfile : Profile
                 src.PowerSupply,
                 null
             ));
+        
+        CreateMap<UpdateFireplaceModel, FireplaceRecord>().ReverseMap();
+        CreateMap<GetFireplaceModel, FireplaceRecord>().ReverseMap();
+        CreateMap<AddFireplaceModel, FireplaceRecord>();
     }
 }
