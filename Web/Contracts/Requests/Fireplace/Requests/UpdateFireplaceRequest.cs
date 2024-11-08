@@ -11,5 +11,4 @@ public sealed class UpdateFireplaceRequest
     public int FuelUsage { get; set; }
     
     public int FireLevel { get; set; }
-    
 }

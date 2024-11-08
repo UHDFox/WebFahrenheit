@@ -1,8 +1,7 @@
+using Application.WaterBoiler;
+using Application.WaterBoiler.Models;
 using AutoMapper;
-using Domain;
-using Domain.Domain.Products;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Waterboiler;
 
@@ -12,68 +11,62 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class WaterBoilerController : Controller
     {
-        private readonly FahrenheitContext _context;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
+        private readonly IWaterBoilerService _waterBoilerService;
         
         
-        public WaterBoilerController(FahrenheitContext context, IMapper mapper)
+        public WaterBoilerController(IMapper mapper, IWaterBoilerService waterBoilerService)
         {
-            _context = context;
-            this.mapper = mapper;
+            _mapper = mapper;
+            _waterBoilerService = waterBoilerService;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> AddAsync(CreateWaterBoilerRequest request)
+        public async Task<ActionResult<Guid>> AddAsync([FromForm] CreateWaterBoilerRequest request, IFormFile imageFile)
         {
-            var result = await _context.WaterBoilers.AddAsync(mapper.Map<WaterBoilerRecord>(request));
-            await _context.SaveChangesAsync();
+            if (imageFile == null)
+            {
+                return BadRequest("Image file is required.");
+            }
 
-            return Created($"{Request.Path}", 
-                mapper.Map<WaterBoilerResponse>(await _context.WaterBoilers.FirstOrDefaultAsync(e => e.Id == result.Entity.Id)));
+            var result = await _waterBoilerService.AddAsync(_mapper.Map<AddWaterBoilerModel>(request), imageFile);
+
+            var entity = await _waterBoilerService.GetByIdAsync(result);
+            return Created($"{Request.Path}/{result}", _mapper.Map<WaterBoilerResponse>(entity));
         }
+
         
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            return Ok(mapper.Map<WaterBoilerResponse>(await _context.WaterBoilers.FirstOrDefaultAsync(e => e.Id == id)));
+            var result = await _waterBoilerService.GetByIdAsync(id);
+            
+            return Ok(_mapper.Map<WaterBoilerResponse>(result));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
-            var result =
-                mapper.Map<IReadOnlyCollection<WaterBoilerResponse>>(await _context.WaterBoilers.Skip((int)offset).Take((int)limit)
-                    .ToListAsync());
-
-            return Ok(new GetAllResponse<WaterBoilerResponse>(result, result.Count));
+            var result = await _waterBoilerService.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
+            return Ok(new GetAllResponse<WaterBoilerResponse>(_mapper.Map<IReadOnlyCollection<WaterBoilerResponse>>(result),
+                result.Count));
         }
         
 
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync(UpdateWaterBoilerRequest request)
+        public async Task<ActionResult> UpdateAsync([FromForm]UpdateWaterBoilerRequest request, IFormFile? imageFile)
         {
-            var entity = await _context.WaterBoilers.FirstOrDefaultAsync(e => e.Id == request.Id)
-                         ?? throw new Exception("WaterBoiler to update not found");
+            var entity = await _waterBoilerService.UpdateAsync(_mapper.Map<UpdateWaterBoilerModel>(request), imageFile);
 
-            mapper.Map(request, entity);
-
-            _context.WaterBoilers.Update(entity);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(mapper.Map<UpdatedResponse>(entity));
+            return Ok(new UpdatedResponse(entity.Id));
         }
         
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var entity = await _context.WaterBoilers.FirstOrDefaultAsync(e => e.Id == id)
-                         ?? throw new Exception("WaterBoiler to delete not found");
-
-            _context.WaterBoilers.Remove(entity);
-            var result = await _context.SaveChangesAsync() > 0;
+            var result = await _waterBoilerService.DeleteAsync(id);
             
             return Ok(new DeletedResponse(id, result));
         }

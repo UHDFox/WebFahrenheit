@@ -1,6 +1,6 @@
 namespace Domain.Domain.Products;
 
-public class WaterBoilerRecord : Product
+public sealed class WaterBoilerRecord : Product
 {
     public WaterBoilerRecord(string name, int price, int heatedValue, string material, int maxTemperature) 
         : base( name, price)

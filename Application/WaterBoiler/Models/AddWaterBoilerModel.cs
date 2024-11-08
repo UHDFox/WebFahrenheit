@@ -1,9 +1,7 @@
-namespace Web.Contracts.Requests.Waterboiler;
+namespace Application.WaterBoiler.Models;
 
-public sealed class WaterBoilerResponse
+public sealed class AddWaterBoilerModel
 {
-    public Guid Id { get; set; }
-    
     public string? Name { get; set; }
     
     public int Price { get; set; }

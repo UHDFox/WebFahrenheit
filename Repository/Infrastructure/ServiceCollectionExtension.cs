@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Repository.Fireplace;
 using Repository.Pump;
+using Repository.WaterBoiler;
 
 namespace Repository.Infrastructure;
 
@@ -11,5 +12,7 @@ public static class ServiceCollectionExtension
         services.AddTransient<IPumpRepository, PumpRepository>();
         
         services.AddTransient<IFireplaceRepository, FireplaceRepository>();
+        
+        services.AddTransient<IWaterBoilerRepository, WaterBoilerRepository>();
     }
 }

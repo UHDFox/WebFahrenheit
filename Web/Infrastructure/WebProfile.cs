@@ -1,5 +1,6 @@
 using Application.Fireplace.Models;
 using Application.Pump.Models;
+using Application.WaterBoiler.Models;
 using AutoMapper;
 using Domain.Domain.Products;
 using Domain.Domain.Users;
@@ -61,6 +62,10 @@ public class WebProfile : Profile
        CreateMap<GetFireplaceModel, FireplaceResponse>();
        CreateMap<UpdateFireplaceRequest, UpdateFireplaceModel>();
        CreateMap<UpdateFireplaceModel, FireplaceResponse>().ReverseMap();
+       
+       CreateMap<CreateWaterBoilerRequest, AddWaterBoilerModel>();
+       CreateMap<GetWaterBoilerModel, WaterBoilerResponse>();
+       CreateMap<UpdateWaterBoilerRequest, UpdateWaterBoilerModel>();
+       CreateMap<UpdateWaterBoilerModel, WaterBoilerResponse>().ReverseMap();
     }
-    
 }

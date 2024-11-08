@@ -1,6 +1,6 @@
 namespace Web.Contracts.Requests.Waterboiler;
 
-public sealed class WaterBoilerResponse
+public sealed class UpdateWaterBoilerRequest
 {
     public Guid Id { get; set; }
     
@@ -13,6 +13,4 @@ public sealed class WaterBoilerResponse
     public string? Material { get; set; }
     
     public int MaxTemperature { get; set; }
-    
-    public string? ImagePath { get; set; }
 }
