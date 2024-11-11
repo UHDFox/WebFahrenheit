@@ -3,7 +3,9 @@ namespace Web.Contracts.Requests.Waterboiler.Requests;
 public sealed class CreateWaterBoilerRequest
 {
     public string? Name { get; set; }
-    
+
+    public string Article { get; set; } = "";
+
     public int Price { get; set; }
     
     public int HeatedValue { get; set; }

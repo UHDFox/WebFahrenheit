@@ -3,6 +3,8 @@ namespace Application.Fireplace.Models;
 public sealed class AddFireplaceModel
 {
     public string? Name { get; set; }
+
+    public string Article { get; set; } = "";
     
     public int Price { get; set; }
     

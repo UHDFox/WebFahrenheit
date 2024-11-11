@@ -3,6 +3,9 @@ namespace Application.Pump.Models;
 public sealed class UpdatePumpModel
 {
     public Guid Id { get; set; }
+
+    public string Article { get; set; } = "";
+
     
     public int Price { get; set; }
     

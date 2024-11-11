@@ -3,6 +3,9 @@ namespace Web.Contracts.Requests.Fireplace.Requests;
 public sealed class CreateFireplaceRequest
 {
     public string? Name { get; set; }
+
+    public string Article { get; set; } = "";
+
     
     public int Price { get; set; }
     

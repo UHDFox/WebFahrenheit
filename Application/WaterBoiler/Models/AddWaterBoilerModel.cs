@@ -3,6 +3,9 @@ namespace Application.WaterBoiler.Models;
 public sealed class AddWaterBoilerModel
 {
     public string? Name { get; set; }
+
+    public string Article { get; set; } = "";
+
     
     public int Price { get; set; }
     

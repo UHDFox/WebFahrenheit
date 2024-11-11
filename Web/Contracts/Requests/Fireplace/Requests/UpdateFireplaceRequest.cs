@@ -5,6 +5,8 @@ public sealed class UpdateFireplaceRequest
     public Guid Id { get; set; }
     
     public string? Name { get; set; }
+
+    public string Article { get; set; } = "";
     
     public int Price { get; set; }
     

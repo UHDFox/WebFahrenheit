@@ -2,10 +2,11 @@ namespace Web.Contracts.Requests.Radiator;
 
 public class RadiatorResponse
 {
-    public RadiatorResponse(Guid id, string name, int price, double heatedValue, string material, string description, string? imagePath)
+    public RadiatorResponse(Guid id, string name, string article, int price, double heatedValue, string material, string description, string? imagePath)
     {
         Id = id;
         Name = name;
+        Article = article;
         Price = price;
         HeatedValue = heatedValue;
         Material = material;
@@ -14,6 +15,8 @@ public class RadiatorResponse
     }
     public Guid Id { get; set; }
     public string Name { get; set; }
+    
+    public string Article { get; set; }
     
     public int Price { get; set; }
     

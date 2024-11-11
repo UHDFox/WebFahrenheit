@@ -8,7 +8,9 @@ public sealed class UpdatePumpRequest
     
     [Required]
     public string? Name { get; set; }
-    
+
+    public string Article { get; set; } = "";
+
     public int Price { get; set; }
     
     [Required]

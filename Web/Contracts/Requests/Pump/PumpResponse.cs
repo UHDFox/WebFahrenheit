@@ -1,11 +1,12 @@
 namespace Web.Contracts.Requests.Pump;
 
-public class PumpResponse
+public sealed class PumpResponse
 {
-    public PumpResponse(Guid id, string name, int price, string brand, int pressure, int powerSupply, string description, string imagePath)
+    public PumpResponse(Guid id, string name, string article, int price, string brand, int pressure, int powerSupply, string description, string imagePath)
     {
         Id = id;
         Name = name;
+        Article = article;
         Price = price;
         Brand = brand;
         Pressure = pressure;
@@ -17,7 +18,9 @@ public class PumpResponse
     public Guid Id { get; set; }
 
     public string Name { get; set; }
-    
+
+    public string Article { get; set; }
+
     public int Price { get; set; }
     
     public string Brand { get; set; }
