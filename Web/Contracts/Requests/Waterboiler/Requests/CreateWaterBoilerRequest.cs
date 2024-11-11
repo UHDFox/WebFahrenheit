@@ -11,4 +11,6 @@ public sealed class CreateWaterBoilerRequest
     public string? Material { get; set; }
     
     public int MaxTemperature { get; set; }
+
+    public string Description { get; set; } = "";
 }

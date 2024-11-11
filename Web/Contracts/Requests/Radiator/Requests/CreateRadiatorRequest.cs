@@ -9,4 +9,6 @@ public sealed class CreateRadiatorRequest
     public double HeatedValue { get; set; }
     
     public string? Material { get; set; }
+
+    public string Description { get; set; } = "";
 }

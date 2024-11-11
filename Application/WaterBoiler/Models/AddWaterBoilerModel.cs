@@ -11,6 +11,6 @@ public sealed class AddWaterBoilerModel
     public string? Material { get; set; }
     
     public int MaxTemperature { get; set; }
-    
-    public string? ImagePath { get; set; }
+
+    public string Description { get; set; } = "";
 }

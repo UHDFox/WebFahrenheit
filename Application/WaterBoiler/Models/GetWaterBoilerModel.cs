@@ -2,7 +2,7 @@ namespace Application.WaterBoiler.Models;
 
 public class GetWaterBoilerModel
 {
-    public GetWaterBoilerModel(Guid id, string name, int price, int heatedValue, string material, int maxTemperature, string? imagePath)
+    public GetWaterBoilerModel(Guid id, string name, int price, int heatedValue, string material, int maxTemperature, string description, string? imagePath)
     {
         Id = id;
         Name = name;
@@ -10,6 +10,7 @@ public class GetWaterBoilerModel
         HeatedValue = heatedValue;
         Material = material;
         MaxTemperature = maxTemperature;
+        Description = description;
         ImagePath = imagePath;
     }
     
@@ -22,6 +23,7 @@ public class GetWaterBoilerModel
     public string Material { get; set; }
     
     public int MaxTemperature { get; set; }
-    
+
+    public string Description { get; set; } = "";
     public string? ImagePath { get; set; }
 }

@@ -2,13 +2,15 @@ namespace Web.Contracts.Requests.Fireplace;
 
 public sealed class FireplaceResponse
 {
-    public FireplaceResponse(Guid id, string name, int price, int fuelUsage, int fireLevel)
+    public FireplaceResponse(Guid id, string name, int price, int fuelUsage, int fireLevel, string description, string imagePath)
     {
         Id = id;
         Name = name;
         Price = price;
         FuelUsage = fuelUsage;
         FireLevel = fireLevel;
+        Description = description;
+        ImagePath = imagePath;
     }
     public Guid Id { get; set; }
     
@@ -19,6 +21,8 @@ public sealed class FireplaceResponse
     public int FuelUsage { get; set; }
 
     public int FireLevel { get; set; }
+    
+    public string Description { get; set; }
 
     public string? ImagePath { get; set; }
 }

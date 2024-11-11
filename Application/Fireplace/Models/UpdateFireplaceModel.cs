@@ -11,4 +11,6 @@ public sealed class UpdateFireplaceModel
     public int FuelUsage { get; set; }
     
     public int FireLevel { get; set; }
+
+    public string Description { get; set; } = "";
 }

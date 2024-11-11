@@ -17,10 +17,12 @@ public class ApplicationProfile : Profile
         CreateMap<AddPumpModel, PumpRecord>()
             .ConstructUsing(src => new PumpRecord(
                 src.Name, 
+                src.Article,
                 src.Price, 
                 src.Brand, 
                 src.Pressure, 
                 src.PowerSupply,
+                src.Description,
                 null
             ));
         

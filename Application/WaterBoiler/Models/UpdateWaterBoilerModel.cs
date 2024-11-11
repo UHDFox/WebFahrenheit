@@ -9,6 +9,8 @@ public class UpdateWaterBoilerModel
     public int HeatedValue { get; set; }
     
     public string? Material { get; set; }
-    
+
+    public string Description { get; set; } = "";
+
     public int MaxTemperature { get; set; }
 }

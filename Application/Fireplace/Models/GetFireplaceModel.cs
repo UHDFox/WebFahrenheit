@@ -2,13 +2,14 @@ namespace Application.Fireplace.Models;
 
 public sealed class GetFireplaceModel
 {
-    public GetFireplaceModel(Guid id, string name, int price, int fuelUsage, int fireLevel, string? imagePath)
+    public GetFireplaceModel(Guid id, string name, int price, int fuelUsage, int fireLevel, string description, string? imagePath)
     {
         Id = id;
         Name = name;
         Price = price;
         FuelUsage = fuelUsage;
         FireLevel = fireLevel;
+        Description = description;
         ImagePath = imagePath;
     }
     
@@ -21,6 +22,8 @@ public sealed class GetFireplaceModel
     public int FuelUsage { get; set; }
     
     public int FireLevel { get; set; }
+
+    public string Description { get; set; } 
     
     public string? ImagePath { get; set; }
 }

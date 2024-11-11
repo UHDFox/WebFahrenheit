@@ -2,7 +2,7 @@ namespace Application.Pump.Models;
 
 public sealed class GetPumpModel
 {
-    public GetPumpModel(Guid id, string name, int price, string brand, int pressure, int powerSupply, string? imagePath)
+    public GetPumpModel(Guid id, string name, int price, string brand, int pressure, int powerSupply, string description, string? imagePath)
     {
         Id = id;
         Name = name;
@@ -11,6 +11,7 @@ public sealed class GetPumpModel
         Pressure = pressure;
         PowerSupply = powerSupply;
         ImagePath = imagePath;
+        Description = description;
     }
     public Guid Id { get; set; }
     
@@ -23,6 +24,7 @@ public sealed class GetPumpModel
     public int Pressure { get; set; }
     
     public int PowerSupply { get; set; }
-
+    
+    public string Description { get; set; }
     public string? ImagePath { get; set; }
 }

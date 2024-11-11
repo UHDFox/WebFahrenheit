@@ -22,11 +22,15 @@ namespace Domain.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Domain.Products.Fireplace", b =>
+            modelBuilder.Entity("Domain.Domain.Products.FireplaceRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("FireLevel")
                         .HasColumnType("integer");
@@ -49,13 +53,17 @@ namespace Domain.Migrations
                     b.ToTable("Fireplaces");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Products.Pump", b =>
+            modelBuilder.Entity("Domain.Domain.Products.PumpRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -80,11 +88,15 @@ namespace Domain.Migrations
                     b.ToTable("Pumps");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Products.Radiator", b =>
+            modelBuilder.Entity("Domain.Domain.Products.RadiatorRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<double>("HeatedValue")
                         .HasColumnType("double precision");
@@ -108,11 +120,15 @@ namespace Domain.Migrations
                     b.ToTable("Radiators");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Products.WaterBoiler", b =>
+            modelBuilder.Entity("Domain.Domain.Products.WaterBoilerRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("HeatedValue")
                         .HasColumnType("integer");

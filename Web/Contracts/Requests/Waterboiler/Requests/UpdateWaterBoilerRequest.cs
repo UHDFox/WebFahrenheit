@@ -13,4 +13,6 @@ public sealed class UpdateWaterBoilerRequest
     public string? Material { get; set; }
     
     public int MaxTemperature { get; set; }
+
+    public string Description { get; set; } = "";
 }

@@ -2,8 +2,8 @@ namespace Domain.Domain.Products;
 
 public sealed class WaterBoilerRecord : Product
 {
-    public WaterBoilerRecord(string name, int price, int heatedValue, string material, int maxTemperature) 
-        : base( name, price)
+    public WaterBoilerRecord(string name, string article, int price, int heatedValue, string material, int maxTemperature, string description) 
+        : base(name, article, price, description)
     {
         HeatedValue = heatedValue;
         Material = material;
