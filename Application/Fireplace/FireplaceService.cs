@@ -1,7 +1,7 @@
 using Application.Infrastructure.Images;
 using Application.Fireplace.Models;
 using AutoMapper;
-using Domain.Domain.Products;
+using Domain.Domain.Entities.Products;
 using Microsoft.AspNetCore.Http;
 using Repository.Fireplace;
 

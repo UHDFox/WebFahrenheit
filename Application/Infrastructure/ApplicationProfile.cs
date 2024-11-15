@@ -2,9 +2,12 @@ using Application.Fireplace.Models;
 using Application.Pump;
 using Application.Pump.Models;
 using Application.Radiator.Models;
+using Application.User;
 using Application.WaterBoiler.Models;
 using AutoMapper;
-using Domain.Domain.Products;
+using Domain.Domain.Entities.Products;
+using Domain.Domain.Entities.Users;
+using Domain.Domain.Enums;
 
 namespace Application.Infrastructure;
 
@@ -37,5 +40,14 @@ public class ApplicationProfile : Profile
         CreateMap<UpdateRadiatorModel, RadiatorRecord>().ReverseMap();
         CreateMap<GetRadiatorModel, RadiatorRecord>().ReverseMap();
         CreateMap<AddRadiatorModel, RadiatorRecord>();
+        
+        
+        CreateMap<GetUserModel, UserRecord>().ReverseMap();
+        CreateMap<AddUserModel, UserRecord>()
+            .ForCtorParam("passwordHash", opt =>
+                opt.MapFrom(src => src.Password));
+        CreateMap<UpdateUserModel, UserRecord>().ReverseMap();
+        CreateMap<RegisterModel, AddUserModel>()
+            .ConstructUsing(src => new AddUserModel(src.Name, src.Password, src.Email, src.PhoneNumber, UserRole.User));
     }
 }

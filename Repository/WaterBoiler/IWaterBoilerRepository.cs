@@ -1,4 +1,4 @@
-using Domain.Domain.Products;
+using Domain.Domain.Entities.Products;
 
 namespace Repository.WaterBoiler;
 

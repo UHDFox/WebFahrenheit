@@ -1,13 +1,16 @@
 namespace Web.Contracts.Requests.Feedback;
 
-public class CreateFeedbackRequest
+public sealed class CreateFeedbackRequest
 {
-    public CreateFeedbackRequest(string message, Guid clientId)
-    {
-        Message = message;
+    public CreateFeedbackRequest(Guid clientId, string?  email, string message)
+    {        
         ClientId = clientId;
+        Email = email;
+        Message = message;
     }
-    public string Message { get; set; }
-    
     public Guid ClientId { get; set; }
+
+    public string? Email { get; set; }
+
+    public string Message { get; set; }
 }

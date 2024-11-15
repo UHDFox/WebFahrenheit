@@ -1,5 +1,5 @@
 using Domain;
-using Domain.Domain.Products;
+using Domain.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repository.WaterBoiler;

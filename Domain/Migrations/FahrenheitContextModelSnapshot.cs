@@ -20,9 +20,10 @@ namespace Domain.Migrations
                 .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "user_role", new[] { "super_admin", "high_level_admin", "low_level_admin", "user" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Domain.Products.FireplaceRecord", b =>
+            modelBuilder.Entity("Domain.Domain.Entities.Products.FireplaceRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +58,7 @@ namespace Domain.Migrations
                     b.ToTable("Fireplaces");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Products.PumpRecord", b =>
+            modelBuilder.Entity("Domain.Domain.Entities.Products.PumpRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,7 +97,7 @@ namespace Domain.Migrations
                     b.ToTable("Pumps");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Products.RadiatorRecord", b =>
+            modelBuilder.Entity("Domain.Domain.Entities.Products.RadiatorRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,7 +133,7 @@ namespace Domain.Migrations
                     b.ToTable("Radiators");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Products.WaterBoilerRecord", b =>
+            modelBuilder.Entity("Domain.Domain.Entities.Products.WaterBoilerRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,13 +172,33 @@ namespace Domain.Migrations
                     b.ToTable("WaterBoilers");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Users.Client", b =>
+            modelBuilder.Entity("Domain.Domain.Entities.Users.FeedbackRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Mail")
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("Domain.Domain.Entities.Users.UserRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -185,7 +206,7 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -193,43 +214,26 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Clients");
-                });
-
-            modelBuilder.Entity("Domain.Domain.Users.Feedback", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<byte>("Role")
+                        .HasColumnType("smallint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("Feedbacks");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Users.Feedback", b =>
+            modelBuilder.Entity("Domain.Domain.Entities.Users.FeedbackRecord", b =>
                 {
-                    b.HasOne("Domain.Domain.Users.Client", "Client")
+                    b.HasOne("Domain.Domain.Entities.Users.UserRecord", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("ClientId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Domain.Users.Client", b =>
+            modelBuilder.Entity("Domain.Domain.Entities.Users.UserRecord", b =>
                 {
                     b.Navigation("Feedbacks");
                 });

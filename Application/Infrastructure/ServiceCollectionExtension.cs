@@ -1,7 +1,10 @@
+using Application.Feedback;
 using Application.Fireplace;
+using Application.Infrastructure.Authentication;
 using Application.Infrastructure.Images;
 using Application.Pump;
 using Application.Radiator;
+using Application.User;
 using Application.WaterBoiler;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +21,14 @@ public static class ServiceCollectionExtension
         services.AddTransient<IWaterBoilerService, WaterBoilerService>();
         services.AddTransient<IRadiatorService, RadiatorService>();
         
+        services.AddTransient<IUserService, UserService>();
+
+        services.AddTransient<IJwtProvider, JwtProvider>();
+
+        services.AddTransient<IPasswordProvider, PasswordProvider>();
+        services.AddTransient<IFeedbackService, FeedbackService>();
+
+        services.AddHttpContextAccessor();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
 }

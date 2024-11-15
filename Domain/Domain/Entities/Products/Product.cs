@@ -1,4 +1,4 @@
-namespace Domain.Domain.Products;
+namespace Domain.Domain.Entities.Products;
 
 public abstract class Product
 {

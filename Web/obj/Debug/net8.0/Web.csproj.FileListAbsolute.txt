@@ -117,3 +117,11 @@ D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Application.pdb
 D:\progs\projects\WebFahrenheit\Web\obj\Debug\net8.0\Web.sourcelink.json
 D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Repository.dll
 D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Repository.pdb
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
