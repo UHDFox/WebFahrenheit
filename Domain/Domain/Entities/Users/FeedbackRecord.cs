@@ -1,17 +1,14 @@
 namespace Domain.Domain.Entities.Users;
 
-public sealed class FeedbackRecord
+public sealed class FeedbackRecord : IDataObject, IUserFeedback
 {
     public FeedbackRecord(){}
 
-    public FeedbackRecord(string message, Guid userId)
+    public FeedbackRecord(Guid userId, string message)
     {
         Message = message;
         UserId = userId;
     }
-
-    public Guid Id { get; set; }
-
     public string Message { get; set; } = "";
     
     public Guid UserId { get; set; }

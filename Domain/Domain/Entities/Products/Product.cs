@@ -1,6 +1,6 @@
 namespace Domain.Domain.Entities.Products;
 
-public abstract class Product
+public abstract class Product : IDataObject
 {
     public Product(string name, string article, int price, string description)
     {
@@ -9,9 +9,6 @@ public abstract class Product
         Price = price;
         Description = description;
     }
-    
-    public Guid Id { get; set; }
-    
     public string Article { get; set; }
     
     public string Name { get; set; }

@@ -1,5 +1,4 @@
 using Application.Radiator;
-using Application.Radiator.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
@@ -31,7 +30,7 @@ namespace Web.Controllers
                 return BadRequest("Image file is required.");
             }
 
-            var result = await _radiatorService.AddAsync(_mapper.Map<AddRadiatorModel>(request), imageFile);
+            var result = await _radiatorService.AddAsync(_mapper.Map<RadiatorModel>(request), imageFile);
 
             var entity = await _radiatorService.GetByIdAsync(result);
             return Created($"{Request.Path}/{result}", _mapper.Map<RadiatorResponse>(entity));
@@ -55,11 +54,10 @@ namespace Web.Controllers
         }
         
 
-
         [HttpPut]
         public async Task<ActionResult> UpdateAsync([FromForm]UpdateRadiatorRequest request, IFormFile? imageFile)
         {
-            var entity = await _radiatorService.UpdateAsync(_mapper.Map<UpdateRadiatorModel>(request), imageFile);
+            var entity = await _radiatorService.UpdateAsync(_mapper.Map<RadiatorModel>(request), imageFile);
 
             return Ok(new UpdatedResponse(entity.Id));
         }

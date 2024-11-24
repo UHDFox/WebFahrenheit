@@ -6,5 +6,5 @@ public class FeedbackResponse
 
     public string Message { get; set; } = "";
     
-    public Guid ClientId { get; set; }
+    public Guid UserId { get; set; }
 }

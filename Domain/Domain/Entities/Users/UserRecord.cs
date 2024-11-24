@@ -2,7 +2,7 @@ using Domain.Domain.Enums;
 
 namespace Domain.Domain.Entities.Users;
 
-public sealed class UserRecord
+public class UserRecord : IDataObject, IUserFeedback
 {
     public UserRecord(string name, string phoneNumber, string passwordHash, string email, UserRole role)
     {
@@ -12,9 +12,6 @@ public sealed class UserRecord
         Email = email;
         Role = role;
     }
-    
-    public Guid Id { get; set; }
-    
     public string Name { get; set; }
     
     public string PhoneNumber { get; set; }

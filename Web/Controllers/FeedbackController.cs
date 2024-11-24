@@ -1,12 +1,8 @@
 using Application.Feedback;
 using AutoMapper;
-using Domain;
-using Domain.Domain.Entities.Users;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Feedback;
-using Web.Contracts.Requests.User;
 
 namespace Web.Controllers
 {
@@ -14,29 +10,23 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class FeedbackController : Controller
     {
-        private readonly FahrenheitContext _context;
         private readonly IMapper mapper;
         private readonly IFeedbackService _service;
-
-
-        
-        
-        public FeedbackController(FahrenheitContext context, IMapper mapper, IFeedbackService service)
+        public FeedbackController(IMapper mapper, IFeedbackService service)
         {
-            _context = context;
             this.mapper = mapper;
-            this._service = service;
+            _service = service;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> AddAsync(CreateFeedbackRequest request)
+        public async Task<ActionResult<Guid>> AddAsync(CreateFeedbackRequest req)
         {
-            var result = await _context.Feedbacks.AddAsync(mapper.Map<FeedbackRecord>(request));
-            await _context.SaveChangesAsync();
+            var result = await _service.AddAsync(new FeedbackModel(new Guid(), req.Email, req.Message, req.UserId));
+            await _service.SaveChangesAsync();
 
             return Created($"{Request.Path}", 
-                mapper.Map<FeedbackResponse>(await _context.Feedbacks.FirstOrDefaultAsync(e => e.Id == result.Entity.Id)));
+                mapper.Map<FeedbackResponse>(await _service.GetByIdAsync(result)));
         }
         
         [HttpPost("createFeedback")]
@@ -44,14 +34,15 @@ namespace Web.Controllers
         public async Task<ActionResult<Guid>> AddUserMadeAsync(CreateFeedbackRequest request)
         {
             Guid result;
-            if (request.Email is null)
+            if (!string.IsNullOrEmpty(request.Email))
             {
-                result = await _service.AddUsingEmail(mapper.Map<AddFeedbackModel>(request));
+                result = await _service.AddUsingEmail(new FeedbackModel(new Guid(),request.Email, request.Message, request.UserId));
             }
             else
             {
-                result = await _service.AddAsync(mapper.Map<AddFeedbackModel>(request));
+                result = await _service.AddAsync(new FeedbackModel(new Guid(),request.Email, request.Message, request.UserId));
             }
+            
             var feedback = await _service.GetByIdAsync(result);
             
             return Created($"{Request.Path}", mapper.Map<FeedbackResponse>(feedback));
@@ -68,36 +59,28 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
-            var result =
-                mapper.Map<IReadOnlyCollection<FeedbackResponse>>(await _context.Feedbacks.Skip((int)offset).Take((int)limit)
-                    .ToListAsync());
-
-            return Ok(new GetAllResponse<FeedbackResponse>(result, result.Count));
+            var result = await _service.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
+            
+            return Ok(new GetAllResponse<FeedbackResponse>(mapper.Map<IReadOnlyCollection<FeedbackResponse>>(result), result.Count));
         }
         
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync(UpdateFeedbackRequest request)
+        public async Task<ActionResult> UpdateAsync(UpdateFeedbackRequest req)
         {
-            var entity = await _context.Feedbacks.FirstOrDefaultAsync(e => e.Id == request.Id)
-                         ?? throw new Exception("Feedback to update not found");
+            await _service.GetByIdAsync(req.Id);
+            
 
-            mapper.Map(request, entity);
+            var result = await _service.UpdateAsync(new FeedbackModel(req.Id, "", req.Message, req.UserId));
 
-            _context.Feedbacks.Update(entity);
+            await _service.SaveChangesAsync();
 
-            await _context.SaveChangesAsync();
-
-            return Ok(mapper.Map<UpdatedResponse>(entity));
+            return Ok(new UpdatedResponse(result.Id));
         }
         
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var entity = await _context.Feedbacks.FirstOrDefaultAsync(e => e.Id == id)
-                         ?? throw new Exception("Feedback to delete not found");
-
-            _context.Feedbacks.Remove(entity);
-            var result = await _context.SaveChangesAsync() > 0;
+            var result = await _service.DeleteAsync(id);
             
             return Ok(new DeletedResponse(id, result));
         }

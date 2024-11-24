@@ -1,5 +1,4 @@
 using Application.WaterBoiler;
-using Application.WaterBoiler.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
@@ -31,7 +30,7 @@ namespace Web.Controllers
                 return BadRequest("Image file is required.");
             }
 
-            var result = await _waterBoilerService.AddAsync(_mapper.Map<AddWaterBoilerModel>(request), imageFile);
+            var result = await _waterBoilerService.AddAsync(_mapper.Map<WaterBoilerModel>(request), imageFile);
 
             var entity = await _waterBoilerService.GetByIdAsync(result);
             return Created($"{Request.Path}/{result}", _mapper.Map<WaterBoilerResponse>(entity));
@@ -59,7 +58,7 @@ namespace Web.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateAsync([FromForm]UpdateWaterBoilerRequest request, IFormFile? imageFile)
         {
-            var entity = await _waterBoilerService.UpdateAsync(_mapper.Map<UpdateWaterBoilerModel>(request), imageFile);
+            var entity = await _waterBoilerService.UpdateAsync(_mapper.Map<WaterBoilerModel>(request), imageFile);
 
             return Ok(new UpdatedResponse(entity.Id));
         }

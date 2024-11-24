@@ -1,9 +1,8 @@
-using Application.Fireplace.Models;
+using Application.Fireplace;
 using Application.Pump;
-using Application.Pump.Models;
-using Application.Radiator.Models;
+using Application.Radiator;
 using Application.User;
-using Application.WaterBoiler.Models;
+using Application.WaterBoiler;
 using AutoMapper;
 using Domain.Domain.Entities.Products;
 using Domain.Domain.Entities.Users;
@@ -15,39 +14,77 @@ public class ApplicationProfile : Profile
 {
     public ApplicationProfile()
     {
-        CreateMap<UpdatePumpModel, PumpRecord>().ReverseMap();
-        CreateMap<GetPumpModel, PumpRecord>().ReverseMap();
-        CreateMap<AddPumpModel, PumpRecord>()
+        CreateMap<PumpModel, PumpRecord>()
             .ConstructUsing(src => new PumpRecord(
-                src.Name, 
+                src.Name,
                 src.Article,
-                src.Price, 
-                src.Brand, 
-                src.Pressure, 
+                src.Price,
+                src.Brand,
+                src.Pressure,
                 src.PowerSupply,
                 src.Description,
                 null
-            ));
-        
-        CreateMap<UpdateFireplaceModel, FireplaceRecord>().ReverseMap();
-        CreateMap<GetFireplaceModel, FireplaceRecord>().ReverseMap();
-        CreateMap<AddFireplaceModel, FireplaceRecord>();
-        
-        CreateMap<UpdateWaterBoilerModel, WaterBoilerRecord>().ReverseMap();
-        CreateMap<GetWaterBoilerModel, WaterBoilerRecord>().ReverseMap();
-        CreateMap<AddWaterBoilerModel, WaterBoilerRecord>();
-        
-        CreateMap<UpdateRadiatorModel, RadiatorRecord>().ReverseMap();
-        CreateMap<GetRadiatorModel, RadiatorRecord>().ReverseMap();
-        CreateMap<AddRadiatorModel, RadiatorRecord>();
+            )).ReverseMap();
         
         
-        CreateMap<GetUserModel, UserRecord>().ReverseMap();
-        CreateMap<AddUserModel, UserRecord>()
-            .ForCtorParam("passwordHash", opt =>
-                opt.MapFrom(src => src.Password));
-        CreateMap<UpdateUserModel, UserRecord>().ReverseMap();
-        CreateMap<RegisterModel, AddUserModel>()
-            .ConstructUsing(src => new AddUserModel(src.Name, src.Password, src.Email, src.PhoneNumber, UserRole.User));
+        CreateMap<FireplaceModel, FireplaceRecord>()
+            .ConstructUsing(src => new FireplaceRecord(
+                src.Name,
+                src.Article,
+                src.Price,
+                src.FuelUsage,
+                src.FireLevel,
+                src.Description
+            )).ReverseMap();
+        
+        CreateMap<WaterBoilerModel, WaterBoilerRecord>()
+            .ConstructUsing(src => new WaterBoilerRecord(
+                src.Name,
+                src.Article,
+                src.Price,
+                src.HeatedValue,
+                src.Material,
+                src.MaxTemperature,
+                src.Description
+            )).ReverseMap();
+        
+        CreateMap<RadiatorModel, RadiatorRecord>()
+            .ConstructUsing(src => new RadiatorRecord(
+                src.Name,
+                src.Article,
+                src.Price,
+                src.HeatedValue,
+                src.Material,
+                src.Description
+            )).ReverseMap();
+        
+        // User mappings
+        CreateMap<UserModel, UserRecord>()
+            .ConstructUsing(src =>
+                new UserRecord(src.Name, src.Password, src.Email, src.PhoneNumber, UserRole.User));
+        
+        CreateMap<UserRecord, UserModel>()
+            .ConstructUsing(src =>
+                new UserModel(
+                    src.Id,
+                    src.Name,
+                    src.PasswordHash, 
+                    src.Email,
+                    src.PhoneNumber,
+                    src.Role
+                ));
+
+        CreateMap<RegisterModel, UserModel>()
+            .ConstructUsing(src =>
+                new UserModel(
+                    Guid.NewGuid(),
+                    src.Name,
+                    src.Password,
+                    src.Email,
+                    src.PhoneNumber,
+                    UserRole.User
+                ))
+            .ForMember(dest => dest.Id, opt => opt.Ignore());
+
     }
 }

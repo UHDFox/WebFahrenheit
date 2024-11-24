@@ -12,6 +12,7 @@
           "Domain": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.10",
           "Microsoft.AspNetCore.OpenApi": "8.0.10",
+          "Microsoft.EntityFrameworkCore": "8.0.10",
           "Repository": "1.0.0",
           "Swashbuckle.AspNetCore": "6.9.0"
         },

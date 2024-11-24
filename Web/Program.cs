@@ -1,10 +1,8 @@
-using System.Net.Sockets;
 using System.Reflection;
 using Application.Infrastructure;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Repository.Infrastructure;
-using Web;
 using Web.Infrastructure;
 using Web.Infrastructure.Authentication;
 
@@ -17,7 +15,7 @@ builder.Services.AddCors(opts =>
     opts.AddPolicy("ApiCorsPolicy",
         policy =>
         {
-            policy.WithOrigins("http://localhost:7045")
+            policy.WithOrigins("http://localhost:7045, http://localhost:5000")
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
@@ -70,8 +68,9 @@ if (app.Environment.IsDevelopment())
     
 }
 
-app.ConfigureStaticFilesUpload();
-app.UseCors("SomePolicy");
+app.UseAuthentication();
+app.UseAuthorization();
+app.ConfigureStaticFilesUpload();   
 app.UseHttpsRedirection();
 app.MapControllers();
 

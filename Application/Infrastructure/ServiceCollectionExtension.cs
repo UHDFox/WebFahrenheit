@@ -15,18 +15,25 @@ public static class ServiceCollectionExtension
 {
     public static void AddBusinessServices(this IServiceCollection services)
     {
-        services.AddTransient<IImageService, ImageService>();
+        /*services.AddTransient<IImageService, ImageService>();
         services.AddTransient<IPumpService, PumpService>();
         services.AddTransient<IFireplaceService, FireplaceService>();
         services.AddTransient<IWaterBoilerService, WaterBoilerService>();
         services.AddTransient<IRadiatorService, RadiatorService>();
         
+        services.AddTransient<IUserService, UserService>();*/
+
         services.AddTransient<IUserService, UserService>();
-
-        services.AddTransient<IJwtProvider, JwtProvider>();
-
-        services.AddTransient<IPasswordProvider, PasswordProvider>();
         services.AddTransient<IFeedbackService, FeedbackService>();
+        services.AddTransient<IImageService, ImageService>();
+        services.AddTransient<IRadiatorService, RadiatorService>();
+        services.AddTransient<IPumpService, PumpService>();
+        services.AddTransient<IFireplaceService, FireplaceService>();
+        services.AddTransient<IWaterBoilerService, WaterBoilerService>();
+        
+        
+        services.AddTransient<IJwtProvider, JwtProvider>();
+        services.AddTransient<IPasswordProvider, PasswordProvider>();
 
         services.AddHttpContextAccessor();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

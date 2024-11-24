@@ -1,6 +1,4 @@
-using Application.Infrastructure.Images;
 using Application.Pump;
-using Application.Pump.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
@@ -31,7 +29,7 @@ namespace Web.Controllers
                 return BadRequest("Image file is required.");
             }
 
-            var result = await _pumpService.AddAsync(_mapper.Map<AddPumpModel>(request), imageFile);
+            var result = await _pumpService.AddAsync(_mapper.Map<PumpModel>(request), imageFile);
 
             var entity = await _pumpService.GetByIdAsync(result);
             return Created($"{Request.Path}/{result}", _mapper.Map<PumpResponse>(entity));
@@ -59,7 +57,7 @@ namespace Web.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateAsync([FromForm]UpdatePumpRequest request, IFormFile? imageFile)
         {
-            var entity = await _pumpService.UpdateAsync(_mapper.Map<UpdatePumpModel>(request), imageFile);
+            var entity = await _pumpService.UpdateAsync(_mapper.Map<PumpModel>(request), imageFile);
 
             return Ok(new UpdatedResponse(entity.Id));
         }

@@ -1,8 +1,9 @@
-namespace Application.Radiator.Models;
+namespace Application.Radiator;
 
-public sealed class GetRadiatorModel
+public class RadiatorModel : TProduct
 {
-    public GetRadiatorModel(Guid id, string name, string article, int price, double heatedValue, string material, string description, string? imagePath)
+    public RadiatorModel(Guid id, string name, string article, int price, double heatedValue, string material, string description, string? imagePath)
+    : base(id, name, article, price)
     {
         Id = id;
         Name = name;
@@ -13,14 +14,7 @@ public sealed class GetRadiatorModel
         Description = description;
         ImagePath = imagePath;
     }
-    public Guid Id { get; set; }
 
-    public string? Name { get; set; }
-
-    public string Article { get; set; }
-    
-    public int Price { get; set; }
-    
     public double HeatedValue { get; set; }
     
     public string Material { get; set; }

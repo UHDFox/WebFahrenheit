@@ -1,5 +1,4 @@
 
-using Application.Pump.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Infrastructure.Images;

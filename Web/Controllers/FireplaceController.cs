@@ -1,5 +1,4 @@
 using Application.Fireplace;
-using Application.Fireplace.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
@@ -31,7 +30,7 @@ namespace Web.Controllers
                 return BadRequest("Image file is required.");
             }
 
-            var result = await _fireplaceService.AddAsync(_mapper.Map<AddFireplaceModel>(request), imageFile);
+            var result = await _fireplaceService.AddAsync(_mapper.Map<FireplaceModel>(request), imageFile);
 
             var entity = await _fireplaceService.GetByIdAsync(result);
             return Created($"{Request.Path}/{result}", _mapper.Map<FireplaceResponse>(entity));
@@ -59,7 +58,7 @@ namespace Web.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateAsync([FromForm]UpdateFireplaceRequest request, IFormFile? imageFile)
         {
-            var entity = await _fireplaceService.UpdateAsync(_mapper.Map<UpdateFireplaceModel>(request), imageFile);
+            var entity = await _fireplaceService.UpdateAsync(_mapper.Map<FireplaceModel>(request), imageFile);
 
             return Ok(new UpdatedResponse(entity.Id));
         }

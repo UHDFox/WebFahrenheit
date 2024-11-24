@@ -2,7 +2,6 @@
 using AutoMapper;
 using Domain.Domain.Entities.Users;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.User;
@@ -53,7 +52,7 @@ public sealed class UserController : Controller
     public async Task<IActionResult> GetListAsync(int? offset, int? limit)
     {
         var result = mapper.Map<IReadOnlyCollection<UserResponse>>
-            (await userService.GetAllAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5)));
+            (await userService.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5)));
 
         return Ok(new GetAllResponse<UserResponse>(result, result.Count));
     }
@@ -69,7 +68,7 @@ public sealed class UserController : Controller
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddAsync(CreateUserRequest data)
     {
-        var result = await userService.AddAsync(mapper.Map<AddUserModel>(data));
+        var result = await userService.AddAsync(mapper.Map<UserModel>(data));
         return Created($"{Request.Path}", mapper.Map<UserResponse>(await userService.GetByIdAsync(result)));
     }
 
@@ -79,7 +78,7 @@ public sealed class UserController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateAsync(UpdateUserRequest data)
     {
-        await userService.UpdateAsync(mapper.Map<UpdateUserModel>(data));
+        await userService.UpdateAsync(mapper.Map<UserModel>(data));
         return Ok(new UpdatedResponse(data.Id));
     }
 
