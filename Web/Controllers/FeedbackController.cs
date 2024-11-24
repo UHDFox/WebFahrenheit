@@ -1,5 +1,6 @@
 using Application.Feedback;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Feedback;
@@ -20,6 +21,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync(CreateFeedbackRequest req)
         {
@@ -31,6 +33,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("createFeedback")]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin, User")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddUserMadeAsync(CreateFeedbackRequest request)
         {
@@ -52,6 +55,7 @@ namespace Web.Controllers
         }
 
         [HttpGet("id:guid")]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             var result = await _service.GetByIdAsync(id);
@@ -60,6 +64,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
             var result = await _service.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
@@ -69,6 +74,7 @@ namespace Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
         public async Task<ActionResult> UpdateAsync(UpdateFeedbackRequest req)
         {
             await _service.GetByIdAsync(req.Id);
@@ -82,6 +88,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _service.DeleteAsync(id);

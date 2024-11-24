@@ -1,5 +1,6 @@
 using Application.WaterBoiler;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Waterboiler;
@@ -23,6 +24,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<ActionResult<Guid>> AddAsync([FromForm] CreateWaterBoilerRequest request, IFormFile imageFile)
         {
             if (imageFile == null)
@@ -38,6 +40,7 @@ namespace Web.Controllers
 
 
         [HttpGet("id:guid")]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin, User")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             var result = await _waterBoilerService.GetByIdAsync(id);
@@ -57,6 +60,7 @@ namespace Web.Controllers
 
 
         [HttpPut]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<ActionResult> UpdateAsync([FromForm] UpdateWaterBoilerRequest request, IFormFile? imageFile)
         {
             var entity = await _waterBoilerService.UpdateAsync(_mapper.Map<WaterBoilerModel>(request), imageFile);
@@ -65,6 +69,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _waterBoilerService.DeleteAsync(id);

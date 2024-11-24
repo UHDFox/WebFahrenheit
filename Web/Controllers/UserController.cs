@@ -65,6 +65,7 @@ public sealed class UserController : Controller
         Ok(mapper.Map<UserResponse>(await userService.GetByIdAsync(id)));
 
     [HttpPost]
+    [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreatedResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddAsync(CreateUserRequest data)

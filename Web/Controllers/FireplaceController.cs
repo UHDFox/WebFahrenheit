@@ -1,5 +1,6 @@
 using Application.Fireplace;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Fireplace;
@@ -22,6 +23,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync([FromForm] CreateFireplaceRequest request, IFormFile imageFile)
         {
@@ -55,6 +57,7 @@ namespace Web.Controllers
 
 
         [HttpPut]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<ActionResult> UpdateAsync([FromForm] UpdateFireplaceRequest request, IFormFile? imageFile)
         {
             var entity = await _fireplaceService.UpdateAsync(_mapper.Map<FireplaceModel>(request), imageFile);
@@ -63,6 +66,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _fireplaceService.DeleteAsync(id);

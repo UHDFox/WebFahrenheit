@@ -1,5 +1,6 @@
 using Application.Pump;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Pump;
@@ -21,6 +22,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync([FromForm] CreatePumpRequest request, IFormFile imageFile)
         {
@@ -54,6 +56,7 @@ namespace Web.Controllers
 
 
         [HttpPut]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<ActionResult> UpdateAsync([FromForm] UpdatePumpRequest request, IFormFile? imageFile)
         {
             var entity = await _pumpService.UpdateAsync(_mapper.Map<PumpModel>(request), imageFile);
@@ -62,6 +65,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _pumpService.DeleteAsync(id);
