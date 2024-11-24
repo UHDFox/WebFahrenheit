@@ -75,7 +75,7 @@ public sealed class UserController : Controller
     }
 
     [HttpPut]
-    [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
+    [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpdatedResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateAsync(UpdateUserRequest data)
@@ -85,7 +85,7 @@ public sealed class UserController : Controller
     }
 
     [HttpDelete]
-    [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
+    [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeletedResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteAsync(Guid id)
