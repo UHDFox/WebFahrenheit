@@ -25,8 +25,8 @@ public class ApplicationProfile : Profile
                 src.Description,
                 null
             )).ReverseMap();
-        
-        
+
+
         CreateMap<FireplaceModel, FireplaceRecord>()
             .ConstructUsing(src => new FireplaceRecord(
                 src.Name,
@@ -36,7 +36,7 @@ public class ApplicationProfile : Profile
                 src.FireLevel,
                 src.Description
             )).ReverseMap();
-        
+
         CreateMap<WaterBoilerModel, WaterBoilerRecord>()
             .ConstructUsing(src => new WaterBoilerRecord(
                 src.Name,
@@ -47,7 +47,7 @@ public class ApplicationProfile : Profile
                 src.MaxTemperature,
                 src.Description
             )).ReverseMap();
-        
+
         CreateMap<RadiatorModel, RadiatorRecord>()
             .ConstructUsing(src => new RadiatorRecord(
                 src.Name,
@@ -57,18 +57,18 @@ public class ApplicationProfile : Profile
                 src.Material,
                 src.Description
             )).ReverseMap();
-        
+
         // User mappings
         CreateMap<UserModel, UserRecord>()
             .ConstructUsing(src =>
                 new UserRecord(src.Name, src.Password, src.Email, src.PhoneNumber, UserRole.User));
-        
+
         CreateMap<UserRecord, UserModel>()
             .ConstructUsing(src =>
                 new UserModel(
                     src.Id,
                     src.Name,
-                    src.PasswordHash, 
+                    src.PasswordHash,
                     src.Email,
                     src.PhoneNumber,
                     src.Role
@@ -85,6 +85,5 @@ public class ApplicationProfile : Profile
                     UserRole.User
                 ))
             .ForMember(dest => dest.Id, opt => opt.Ignore());
-
     }
 }

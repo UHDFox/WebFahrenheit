@@ -20,7 +20,7 @@ public static class ServiceCollectionExtension
         services.AddTransient<IFireplaceService, FireplaceService>();
         services.AddTransient<IWaterBoilerService, WaterBoilerService>();
         services.AddTransient<IRadiatorService, RadiatorService>();
-        
+
         services.AddTransient<IUserService, UserService>();*/
 
         services.AddTransient<IUserService, UserService>();
@@ -30,8 +30,8 @@ public static class ServiceCollectionExtension
         services.AddTransient<IPumpService, PumpService>();
         services.AddTransient<IFireplaceService, FireplaceService>();
         services.AddTransient<IWaterBoilerService, WaterBoilerService>();
-        
-        
+
+
         services.AddTransient<IJwtProvider, JwtProvider>();
         services.AddTransient<IPasswordProvider, PasswordProvider>();
 

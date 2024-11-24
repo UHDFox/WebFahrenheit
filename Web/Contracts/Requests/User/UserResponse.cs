@@ -13,11 +13,11 @@ public sealed class UserResponse
         PasswordHash = passwordHash;
         Role = role;
     }
-    
+
     public Guid Id { get; set; }
-    
+
     public string Name { get; set; }
-    
+
     public string PhoneNumber { get; set; }
 
     public string PasswordHash { get; set; }

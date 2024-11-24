@@ -61,7 +61,8 @@ public sealed class UserController : Controller
     [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserRecord))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetByIdAsync(Guid id) => Ok(mapper.Map<UserResponse>(await userService.GetByIdAsync(id)));
+    public async Task<IActionResult> GetByIdAsync(Guid id) =>
+        Ok(mapper.Map<UserResponse>(await userService.GetByIdAsync(id)));
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CreatedResponse))]

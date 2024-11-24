@@ -15,8 +15,9 @@ public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRec
     private readonly IUserRepository _userRepository;
     private readonly IFeedbackRepository _feedbackRepository;
 
-    public FeedbackService(IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, IFeedbackRepository feedbackRepository)
-    : base(feedbackRepository, mapper)
+    public FeedbackService(IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository,
+        IFeedbackRepository feedbackRepository)
+        : base(feedbackRepository, mapper)
     {
         _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
@@ -51,7 +52,7 @@ public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRec
         var name = nameClaim.Value;
 
         // Proceed to store feedback, using name and userId, then return a Guid
-        
+
         // Store the feedback (example: saving to database or a collection)
         //await SaveFeedbackAsync(feedbackId, message, name, userId);
 

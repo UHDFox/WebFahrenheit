@@ -5,10 +5,12 @@ using SkiiResort.Application.Exceptions;
 
 namespace Application;
 
-public abstract class CustomerService<TModel, TRecord> : ICustomerService<TModel> where TModel: CustomerItem where TRecord: IUserFeedback
+public abstract class CustomerService<TModel, TRecord> : ICustomerService<TModel>
+    where TModel : CustomerItem where TRecord : IUserFeedback
 {
     private readonly IMapper _mapper;
     private readonly IRepository<TRecord> _repository;
+
     public CustomerService(IRepository<TRecord> repository, IMapper mapper)
     {
         _repository = repository;
@@ -49,12 +51,12 @@ public abstract class CustomerService<TModel, TRecord> : ICustomerService<TModel
                      ?? throw new NotFoundException("user entity not found");
 
         _mapper.Map(userModel, entity);
-        
-       _repository.Update(entity);
+
+        _repository.Update(entity);
         await _repository.SaveChangesAsync();
 
         return userModel;
     }
-    
+
     public async Task<int> SaveChangesAsync() => await _repository.SaveChangesAsync();
 }

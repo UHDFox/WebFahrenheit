@@ -12,8 +12,9 @@ public class UserRecord : IDataObject, IUserFeedback
         Email = email;
         Role = role;
     }
+
     public string Name { get; set; }
-    
+
     public string PhoneNumber { get; set; }
 
     public string PasswordHash { get; set; }
@@ -21,6 +22,6 @@ public class UserRecord : IDataObject, IUserFeedback
     public string Email { get; set; }
 
     public UserRole Role { get; set; }
-    
+
     public IList<FeedbackRecord> Feedbacks { get; set; } = new List<FeedbackRecord>();
 }

@@ -34,32 +34,32 @@ public class WebProfile : Profile
                 src.Email,
                 src.Password,
                 src.Role));
-        
+
         CreateMap<CreateUserRequest, UserModel>()
             .ConstructUsing(src => new UserModel(
-                Guid.NewGuid(), 
+                Guid.NewGuid(),
                 src.Name,
                 src.Password,
                 src.Email,
                 src.PhoneNumber,
                 src.Role
             ));
-        
-        
+
+
         CreateMap<UpdateUserRequest, UserModel>().ReverseMap();
         CreateMap<LoginRequest, LoginModel>();
         CreateMap<RegisterRequest, RegisterModel>();
         CreateMap<RegisterModel, UserModel>();
 
         CreateMap<CreateFeedbackRequest, FeedbackModel>();
-        CreateMap<FeedbackModel, FeedbackResponse>();  
+        CreateMap<FeedbackModel, FeedbackResponse>();
         CreateMap<FeedbackRecord, FeedbackModel>()
             .ConstructUsing(src => new FeedbackModel(src.Id, new string(""), src.Message, src.UserId));
 
-    // Pump mappings
+        // Pump mappings
         CreateMap<CreatePumpRequest, PumpModel>()
             .ConstructUsing(src => new PumpModel(
-                Guid.NewGuid(), 
+                Guid.NewGuid(),
                 src.Name,
                 src.Article,
                 src.Price,
@@ -71,7 +71,8 @@ public class WebProfile : Profile
             ));
         CreateMap<PumpModel, PumpResponse>()
             .ConstructUsing(src => new PumpResponse(
-                src.Id, src.Name, src.Article, src.Price, src.Brand, src.Pressure, src.PowerSupply, src.Description, src.ImagePath));
+                src.Id, src.Name, src.Article, src.Price, src.Brand, src.Pressure, src.PowerSupply, src.Description,
+                src.ImagePath));
         CreateMap<UpdatePumpRequest, PumpModel>()
             .ConstructUsing(request => new PumpModel(
                 request.Id,
@@ -82,23 +83,23 @@ public class WebProfile : Profile
                 request.Pressure,
                 request.Description,
                 request.PowerSupply,
-                null 
+                null
             ));
-        
+
         CreateMap<WaterBoilerRecord, CreateWaterBoilerRequest>().ReverseMap();
         CreateMap<WaterBoilerRecord, UpdateWaterBoilerRequest>().ReverseMap();
         CreateMap<WaterBoilerRecord, WaterBoilerResponse>().ReverseMap();
         CreateMap<WaterBoilerRecord, UpdatedResponse>().ReverseMap();
-        
+
         CreateMap<RadiatorRecord, CreateRadiatorRequest>().ReverseMap();
         CreateMap<RadiatorRecord, UpdateRadiatorRequest>().ReverseMap();
         CreateMap<RadiatorRecord, RadiatorResponse>().ReverseMap();
         CreateMap<RadiatorRecord, UpdatedResponse>().ReverseMap();
-        
+
         // Fireplace mappings
         CreateMap<CreateFireplaceRequest, FireplaceModel>()
             .ConstructUsing(src => new FireplaceModel(
-                Guid.NewGuid(), 
+                Guid.NewGuid(),
                 src.Name,
                 src.Article,
                 src.Price,
@@ -109,8 +110,9 @@ public class WebProfile : Profile
             ));
         CreateMap<FireplaceModel, FireplaceResponse>()
             .ConstructUsing(src => new FireplaceResponse(
-                src.Id, src.Name, src.Article, src.Price, src.FuelUsage, src.FireLevel, src.Description, src.ImagePath));
-        
+                src.Id, src.Name, src.Article, src.Price, src.FuelUsage, src.FireLevel, src.Description,
+                src.ImagePath));
+
         CreateMap<UpdateFireplaceRequest, FireplaceModel>()
             .ConstructUsing(src => new FireplaceModel(
                 src.Id,
@@ -122,11 +124,11 @@ public class WebProfile : Profile
                 src.Description,
                 null
             ));
-       
+
         // WaterBoiler mappings
         CreateMap<CreateWaterBoilerRequest, WaterBoilerModel>()
             .ConstructUsing(src => new WaterBoilerModel(
-                Guid.NewGuid(), 
+                Guid.NewGuid(),
                 src.Name,
                 src.Article,
                 src.Price,
@@ -138,8 +140,9 @@ public class WebProfile : Profile
             ));
         CreateMap<WaterBoilerModel, WaterBoilerResponse>()
             .ConstructUsing(src => new WaterBoilerResponse(
-                src.Id, src.Name, src.Article, src.Price, src.HeatedValue, src.Material, src.Description, src.ImagePath));
-        
+                src.Id, src.Name, src.Article, src.Price, src.HeatedValue, src.Material, src.Description,
+                src.ImagePath));
+
         CreateMap<UpdateWaterBoilerRequest, WaterBoilerModel>()
             .ConstructUsing(src => new WaterBoilerModel(
                 src.Id,
@@ -152,11 +155,11 @@ public class WebProfile : Profile
                 src.Description,
                 null
             ));
-       
+
         // Radiator mappings
         CreateMap<CreateRadiatorRequest, RadiatorModel>()
             .ConstructUsing(src => new RadiatorModel(
-                Guid.NewGuid(), 
+                Guid.NewGuid(),
                 src.Name,
                 src.Article,
                 src.Price,
@@ -167,7 +170,8 @@ public class WebProfile : Profile
             ));
         CreateMap<RadiatorModel, RadiatorResponse>()
             .ConstructUsing(src => new RadiatorResponse(
-                src.Id, src.Name, src.Article, src.Price, src.HeatedValue, src.Material, src.Description, src.ImagePath));
+                src.Id, src.Name, src.Article, src.Price, src.HeatedValue, src.Material, src.Description,
+                src.ImagePath));
 
         CreateMap<UpdateRadiatorRequest, RadiatorModel>()
             .ConstructUsing(src => new RadiatorModel(

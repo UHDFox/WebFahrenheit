@@ -65,16 +65,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    
 }
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.ConfigureStaticFilesUpload();   
+app.ConfigureStaticFilesUpload();
 app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
-
-
-

@@ -7,8 +7,8 @@ using Repository;
 namespace Application;
 
 public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
-    where TModel : TProduct 
-    where TRecord : Product 
+    where TModel : TProduct
+    where TRecord : Product
 {
     private IRepository<TRecord> _repository;
     private readonly IMapper _mapper;
@@ -20,6 +20,7 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
         _mapper = mapper;
         _imageService = imageService;
     }
+
     public async Task<IReadOnlyCollection<TModel>> GetListAsync(int offset, int limit)
     {
         return _mapper.Map<IReadOnlyCollection<TModel>>(await _repository.GetAllAsync(offset, limit));
@@ -34,13 +35,14 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
     public async Task<Guid> AddAsync(TModel model, IFormFile? imageFile)
     {
         var entity = _mapper.Map<TRecord>(model);
-            
-        entity.ImagePath = await _imageService.SaveImageLocallyAsync(imageFile, typeof(TModel).Name.Replace("Model", ""));
+
+        entity.ImagePath =
+            await _imageService.SaveImageLocallyAsync(imageFile, typeof(TModel).Name.Replace("Model", ""));
 
         var result = await _repository.AddAsync(entity);
 
         await _repository.SaveChangesAsync();
-        
+
         return result;
     }
 
@@ -67,22 +69,23 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
     {
         var entity = await _repository.GetByIdAsync(model.Id)
                      ?? throw new Exception("Entity not found");
-        
+
         var oldImagePath = entity.ImagePath;
-        
+
         _mapper.Map(model, entity);
-        
+
         if (imageFile != null)
         {
-            entity.ImagePath = await _imageService.UpdateImageAsync(imageFile, typeof(TModel).Name.Replace("Model", ""), oldImagePath);
+            entity.ImagePath =
+                await _imageService.UpdateImageAsync(imageFile, typeof(TModel).Name.Replace("Model", ""), oldImagePath);
         }
 
         _repository.Update(entity);
-        
+
         await _repository.SaveChangesAsync();
 
         return model;
     }
-    
+
     public async Task<int> SaveChangesAsync() => await _repository.SaveChangesAsync();
 }

@@ -12,8 +12,8 @@ namespace Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IPumpService _pumpService;
-        
-        
+
+
         public PumpController(IMapper mapper, IPumpService pumpService)
         {
             _mapper = mapper;
@@ -35,12 +35,12 @@ namespace Web.Controllers
             return Created($"{Request.Path}/{result}", _mapper.Map<PumpResponse>(entity));
         }
 
-        
+
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             var result = await _pumpService.GetByIdAsync(id);
-            
+
             return Ok(_mapper.Map<PumpResponse>(result));
         }
 
@@ -51,22 +51,21 @@ namespace Web.Controllers
             return Ok(new GetAllResponse<PumpResponse>(_mapper.Map<IReadOnlyCollection<PumpResponse>>(result),
                 result.Count));
         }
-        
 
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromForm]UpdatePumpRequest request, IFormFile? imageFile)
+        public async Task<ActionResult> UpdateAsync([FromForm] UpdatePumpRequest request, IFormFile? imageFile)
         {
             var entity = await _pumpService.UpdateAsync(_mapper.Map<PumpModel>(request), imageFile);
 
             return Ok(new UpdatedResponse(entity.Id));
         }
-        
+
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _pumpService.DeleteAsync(id);
-            
+
             return Ok(new DeletedResponse(id, result));
         }
     }

@@ -20,7 +20,7 @@ public static class AuthenticationExtensions
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey()
                 };
-                
+
                 options.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
@@ -29,6 +29,7 @@ public static class AuthenticationExtensions
                         {
                             context.Token = token;
                         }
+
                         return Task.CompletedTask;
                     }
                 };

@@ -2,8 +2,9 @@ namespace Application.Fireplace;
 
 public sealed class FireplaceModel : TProduct
 {
-    public FireplaceModel(Guid id, string name, string article, int price, int fuelUsage, int fireLevel, string description, string? imagePath)
-    :base(id, name, article, price)
+    public FireplaceModel(Guid id, string name, string article, int price, int fuelUsage, int fireLevel,
+        string description, string? imagePath)
+        : base(id, name, article, price)
     {
         Name = name;
         Article = article;
@@ -13,11 +14,12 @@ public sealed class FireplaceModel : TProduct
         Description = description;
         ImagePath = imagePath;
     }
+
     public int FuelUsage { get; set; }
-    
+
     public int FireLevel { get; set; }
 
-    public string Description { get; set; } 
-    
+    public string Description { get; set; }
+
     public string? ImagePath { get; set; }
 }

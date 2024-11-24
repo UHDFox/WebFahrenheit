@@ -13,6 +13,7 @@ public sealed class UserModel : CustomerItem
         PhoneNumber = phoneNumber;
         Role = role;
     }
+
     public string Name { get; set; }
 
     public string Password { get; set; }

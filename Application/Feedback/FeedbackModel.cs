@@ -9,9 +9,10 @@ public sealed class FeedbackModel : CustomerItem
         Message = message;
         UserId = userId;
     }
+
     public string? Email { get; set; }
 
     public string Message { get; set; }
-    
+
     public Guid UserId { get; set; }
 }

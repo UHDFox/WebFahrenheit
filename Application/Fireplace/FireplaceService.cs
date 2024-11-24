@@ -5,18 +5,17 @@ using Repository.Fireplace;
 
 namespace Application.Fireplace;
 
-internal sealed class FireplaceService : ProductService<FireplaceModel, FireplaceRecord> ,IFireplaceService
+internal sealed class FireplaceService : ProductService<FireplaceModel, FireplaceRecord>, IFireplaceService
 {
     private readonly IMapper _mapper;
     private readonly IFireplaceRepository _repository;
     private readonly IImageService _imageService;
 
-    public FireplaceService(IFireplaceRepository repository, IMapper mapper, IImageService imageService) : base(repository, mapper, imageService)
+    public FireplaceService(IFireplaceRepository repository, IMapper mapper, IImageService imageService) : base(
+        repository, mapper, imageService)
     {
         _repository = repository;
         _mapper = mapper;
         _imageService = imageService;
     }
-
-
 }

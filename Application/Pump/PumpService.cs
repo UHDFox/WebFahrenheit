@@ -11,11 +11,11 @@ internal sealed class PumpService : ProductService<PumpModel, PumpRecord>, IPump
     private readonly IPumpRepository repository;
     private readonly IImageService _imageService;
 
-    public PumpService(IPumpRepository repository, IMapper mapper, IImageService imageService) : base(repository, mapper, imageService)
+    public PumpService(IPumpRepository repository, IMapper mapper, IImageService imageService) : base(repository,
+        mapper, imageService)
     {
         this.repository = repository;
         this.mapper = mapper;
         _imageService = imageService;
     }
-
 }

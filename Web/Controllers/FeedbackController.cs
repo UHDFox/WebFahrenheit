@@ -12,6 +12,7 @@ namespace Web.Controllers
     {
         private readonly IMapper mapper;
         private readonly IFeedbackService _service;
+
         public FeedbackController(IMapper mapper, IFeedbackService service)
         {
             this.mapper = mapper;
@@ -25,10 +26,10 @@ namespace Web.Controllers
             var result = await _service.AddAsync(new FeedbackModel(new Guid(), req.Email, req.Message, req.UserId));
             await _service.SaveChangesAsync();
 
-            return Created($"{Request.Path}", 
+            return Created($"{Request.Path}",
                 mapper.Map<FeedbackResponse>(await _service.GetByIdAsync(result)));
         }
-        
+
         [HttpPost("createFeedback")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddUserMadeAsync(CreateFeedbackRequest request)
@@ -36,23 +37,25 @@ namespace Web.Controllers
             Guid result;
             if (!string.IsNullOrEmpty(request.Email))
             {
-                result = await _service.AddUsingEmail(new FeedbackModel(new Guid(),request.Email, request.Message, request.UserId));
+                result = await _service.AddUsingEmail(new FeedbackModel(new Guid(), request.Email, request.Message,
+                    request.UserId));
             }
             else
             {
-                result = await _service.AddAsync(new FeedbackModel(new Guid(),request.Email, request.Message, request.UserId));
+                result = await _service.AddAsync(new FeedbackModel(new Guid(), request.Email, request.Message,
+                    request.UserId));
             }
-            
+
             var feedback = await _service.GetByIdAsync(result);
-            
+
             return Created($"{Request.Path}", mapper.Map<FeedbackResponse>(feedback));
         }
-        
+
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             var result = await _service.GetByIdAsync(id);
-            
+
             return Ok(mapper.Map<FeedbackResponse>(result));
         }
 
@@ -60,15 +63,16 @@ namespace Web.Controllers
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
             var result = await _service.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
-            
-            return Ok(new GetAllResponse<FeedbackResponse>(mapper.Map<IReadOnlyCollection<FeedbackResponse>>(result), result.Count));
+
+            return Ok(new GetAllResponse<FeedbackResponse>(mapper.Map<IReadOnlyCollection<FeedbackResponse>>(result),
+                result.Count));
         }
-        
+
         [HttpPut]
         public async Task<ActionResult> UpdateAsync(UpdateFeedbackRequest req)
         {
             await _service.GetByIdAsync(req.Id);
-            
+
 
             var result = await _service.UpdateAsync(new FeedbackModel(req.Id, "", req.Message, req.UserId));
 
@@ -76,12 +80,12 @@ namespace Web.Controllers
 
             return Ok(new UpdatedResponse(result.Id));
         }
-        
+
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _service.DeleteAsync(id);
-            
+
             return Ok(new DeletedResponse(id, result));
         }
     }

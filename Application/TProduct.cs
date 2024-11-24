@@ -9,9 +9,10 @@ public abstract class TProduct : TObject
         Article = article;
         Price = price;
     }
+
     public string Name { get; set; }
-    
+
     public string Article { get; set; }
-    
+
     public int Price { get; set; }
 }

@@ -1,6 +1,6 @@
 namespace Application;
 
-public interface IService<TModel> where TModel: TObject
+public interface IService<TModel> where TModel : TObject
 {
     public Task<IReadOnlyCollection<TModel>> GetListAsync(int offset, int limit);
 

@@ -13,8 +13,8 @@ namespace Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IFireplaceService _fireplaceService;
-        
-        
+
+
         public FireplaceController(IMapper mapper, IFireplaceService fireplaceService)
         {
             _mapper = mapper;
@@ -36,12 +36,12 @@ namespace Web.Controllers
             return Created($"{Request.Path}/{result}", _mapper.Map<FireplaceResponse>(entity));
         }
 
-        
+
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             var result = await _fireplaceService.GetByIdAsync(id);
-            
+
             return Ok(_mapper.Map<FireplaceResponse>(result));
         }
 
@@ -52,22 +52,21 @@ namespace Web.Controllers
             return Ok(new GetAllResponse<FireplaceResponse>(_mapper.Map<IReadOnlyCollection<FireplaceResponse>>(result),
                 result.Count));
         }
-        
 
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromForm]UpdateFireplaceRequest request, IFormFile? imageFile)
+        public async Task<ActionResult> UpdateAsync([FromForm] UpdateFireplaceRequest request, IFormFile? imageFile)
         {
             var entity = await _fireplaceService.UpdateAsync(_mapper.Map<FireplaceModel>(request), imageFile);
 
             return Ok(new UpdatedResponse(entity.Id));
         }
-        
+
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _fireplaceService.DeleteAsync(id);
-            
+
             return Ok(new DeletedResponse(id, result));
         }
     }

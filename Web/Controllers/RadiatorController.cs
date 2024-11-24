@@ -13,8 +13,8 @@ namespace Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRadiatorService _radiatorService;
-        
-        
+
+
         public RadiatorController(IMapper mapper, IRadiatorService radiatorService)
         {
             _mapper = mapper;
@@ -36,12 +36,12 @@ namespace Web.Controllers
             return Created($"{Request.Path}/{result}", _mapper.Map<RadiatorResponse>(entity));
         }
 
-        
+
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             var result = await _radiatorService.GetByIdAsync(id);
-            
+
             return Ok(_mapper.Map<RadiatorResponse>(result));
         }
 
@@ -52,21 +52,21 @@ namespace Web.Controllers
             return Ok(new GetAllResponse<RadiatorResponse>(_mapper.Map<IReadOnlyCollection<RadiatorResponse>>(result),
                 result.Count));
         }
-        
+
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromForm]UpdateRadiatorRequest request, IFormFile? imageFile)
+        public async Task<ActionResult> UpdateAsync([FromForm] UpdateRadiatorRequest request, IFormFile? imageFile)
         {
             var entity = await _radiatorService.UpdateAsync(_mapper.Map<RadiatorModel>(request), imageFile);
 
             return Ok(new UpdatedResponse(entity.Id));
         }
-        
+
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _radiatorService.DeleteAsync(id);
-            
+
             return Ok(new DeletedResponse(id, result));
         }
     }
