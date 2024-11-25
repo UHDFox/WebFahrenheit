@@ -1,11 +1,11 @@
-using Application.Feedback;
-using Application.Fireplace;
 using Application.Infrastructure.Authentication;
 using Application.Infrastructure.Images;
-using Application.Pump;
-using Application.Radiator;
-using Application.User;
-using Application.WaterBoiler;
+using Application.Product.Fireplace;
+using Application.Product.Pump;
+using Application.Product.Radiator;
+using Application.Product.WaterBoiler;
+using Application.UserFeedback.Feedback;
+using Application.UserFeedback.User;
 using Microsoft.Extensions.DependencyInjection;
 
 

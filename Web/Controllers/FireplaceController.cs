@@ -1,4 +1,4 @@
-using Application.Fireplace;
+using Application.Product.Fireplace;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

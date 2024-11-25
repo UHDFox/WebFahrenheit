@@ -1,4 +1,4 @@
-using Application.Pump;
+using Application.Product.Pump;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

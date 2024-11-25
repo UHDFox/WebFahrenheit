@@ -1,9 +1,9 @@
-using Application.Feedback;
-using Application.Fireplace;
-using Application.Pump;
-using Application.Radiator;
-using Application.User;
-using Application.WaterBoiler;
+using Application.Product.Fireplace;
+using Application.Product.Pump;
+using Application.Product.Radiator;
+using Application.Product.WaterBoiler;
+using Application.UserFeedback.Feedback;
+using Application.UserFeedback.User;
 using AutoMapper;
 using Domain.Domain.Entities.Products;
 using Domain.Domain.Entities.Users;

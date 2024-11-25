@@ -1,4 +1,4 @@
-﻿using Application.User;
+﻿using Application.UserFeedback.User;
 using AutoMapper;
 using Domain.Domain.Entities.Users;
 using Microsoft.AspNetCore.Authorization;

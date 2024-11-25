@@ -1,4 +1,4 @@
-using Application.Feedback;
+using Application.UserFeedback.Feedback;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
