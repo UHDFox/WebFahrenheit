@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Water Boiler Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        #boilerDetails {
+            margin-top: 20px;
+        }
+        #boilerImage {
+            max-width: 500px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Water Boiler Details</h1>
+<button onclick="getBoilerDetails()">Get Water Boiler Details</button>
+
+<div id="request">
+    <input name="productId" id="searchId" placeholder="Enter Boiler ID">
+</div>
+
+<div id="boilerDetails">
+    <h2>Details:</h2>
+    <p id="name">Name: </p>
+    <p id="price">Price: </p>
+    <p id="heatedValue">Heated Value: </p>
+    <p id="material">Material: </p>
+    <p id="maxTemperature">Max Temperature: </p>
+    <h3>Image:</h3>
+    <img id="boilerImage" src="" alt="Water Boiler Image">
+</div>
+
+<script>
+    function getBoilerDetails() {
+        // Get the product ID entered by the user
+        const productId = document.getElementById("searchId").value;
+
+        // Check if product ID is provided
+        if (!productId) {
+            alert("Please enter a Boiler ID");
+            return;
+        }
+
+        // Construct the API URL using the entered product ID
+        const apiUrl = `http://localhost:5000/api/WaterBoiler/id:guid?id=${productId}`;
+
+        // Fetch the product details from the API
+        fetch(apiUrl)
+            .then(response => {
+                console.log('Raw response:', response);
+                if (!response.ok) {
+                    throw new Error('Water Boiler not found');
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                // Update the page with the boiler details
+                document.getElementById("name").textContent = "Name: " + data.name;
+                document.getElementById("price").textContent = "Price: " + data.price;
+                document.getElementById("heatedValue").textContent = "Heated Value: " + data.heatedValue;
+                document.getElementById("material").textContent = "Material: " + data.material;
+                document.getElementById("maxTemperature").textContent = "Max Temperature: " + data.maxTemperature;
+
+                // Set the image source to the image path
+                const imageUrl = `http://localhost:5000${data.imagePath}`;
+                document.getElementById("boilerImage").src = imageUrl;
+            })
+            .catch(error => {
+                console.error("Error fetching boiler details:", error);
+                alert("An error occurred while fetching the data.");
+            });
+    }
+</script>
+
+</body>
+</html>

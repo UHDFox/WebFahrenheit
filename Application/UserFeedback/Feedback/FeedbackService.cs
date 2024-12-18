@@ -1,7 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using Application.Infrastructure.Exceptions;
 using AutoMapper;
+using Domain;
 using Domain.Domain.Entities.Users;
+using Domain.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using Repository.Feedback;
 using Repository.User;
@@ -14,15 +16,17 @@ public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRec
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IUserRepository _userRepository;
     private readonly IFeedbackRepository _feedbackRepository;
+    public readonly FahrenheitContext _context;
 
     public FeedbackService(IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository,
-        IFeedbackRepository feedbackRepository)
+        IFeedbackRepository feedbackRepository, FahrenheitContext context)
         : base(feedbackRepository, mapper)
     {
         _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
         _userRepository = userRepository;
         _feedbackRepository = feedbackRepository;
+        _context = context;
     }
 
 
@@ -62,7 +66,8 @@ public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRec
     public async Task<Guid> AddUsingEmail(FeedbackModel model)
     {
         var user = await _userRepository.GetByEmailAsync(model.Email!)
-                   ?? throw new NotFoundException();
+                   ?? new UserRecord("", "", "", "", UserRole.User);
+        user.Id = _context.Users.First().Id;
 
         var feedback = new FeedbackRecord(user.Id, model.Message);
 

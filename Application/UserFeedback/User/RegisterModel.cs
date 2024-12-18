@@ -2,6 +2,9 @@
 
 public sealed class RegisterModel
 {
+    public RegisterModel()
+    {
+    }
     public string Name { get; set; } = "";
 
     public string Password { get; set; } = "";

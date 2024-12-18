@@ -4,13 +4,17 @@ namespace Web.Contracts.Requests.User;
 
 public sealed class UserResponse
 {
-    public UserResponse(Guid id, string name, string phoneNumber, string email, string passwordHash, UserRole role)
+    public UserResponse()
+    {
+    }
+
+    public UserResponse(Guid id, string name, string phoneNumber, string email, string password, UserRole role)
     {
         Id = id;
         Name = name;
         Email = email;
         PhoneNumber = phoneNumber;
-        PasswordHash = passwordHash;
+        Password = password;
         Role = role;
     }
 
@@ -20,7 +24,7 @@ public sealed class UserResponse
 
     public string PhoneNumber { get; set; }
 
-    public string PasswordHash { get; set; }
+    public string Password{ get; set; }
 
     public string Email { get; set; }
 

@@ -4,6 +4,9 @@ namespace Application.UserFeedback.User;
 
 public sealed class UserModel : CustomerItem
 {
+    public UserModel() : base(Guid.Empty)
+    {
+    }
     public UserModel(Guid id, string name, string password, string email, string phoneNumber, UserRole role) : base(id)
     {
         Id = id;

@@ -2,6 +2,10 @@
 
 public sealed class LoginModel
 {
+    public LoginModel()
+    {
+        
+    }
     public LoginModel(string email, string password)
     {
         Email = email;

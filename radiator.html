@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Radiator Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        #radiatorDetails {
+            margin-top: 20px;
+        }
+        #radiatorImage {
+            max-width: 500px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Radiator Details</h1>
+<button onclick="getRadiatorDetails()">Get Radiator Details</button>
+
+<div id="request">
+    <input name="productId" id="searchId" placeholder="Enter Radiator ID">
+</div>
+
+<div id="radiatorDetails">
+    <h2>Details:</h2>
+    <p id="name">Name: </p>
+    <p id="price">Price: </p>
+    <p id="heatedValue">Heated Value: </p>
+    <p id="material">Material: </p>
+    <h3>Image:</h3>
+    <img id="radiatorImage" src="" alt="Radiator Image">
+</div>
+
+<script>
+    function getRadiatorDetails() {
+        // Get the product ID entered by the user
+        const productId = document.getElementById("searchId").value;
+
+        // Check if product ID is provided
+        if (!productId) {
+            alert("Please enter a Radiator ID");
+            return;
+        }
+
+        // Construct the API URL using the entered product ID
+        const apiUrl = `http://localhost:5000/api/Radiator/id:guid?id=${productId}`;
+
+        // Fetch the product details from the API
+        fetch(apiUrl)
+            .then(response => {
+                console.log('Raw response:', response);
+                if (!response.ok) {
+                    throw new Error('Radiator not found');
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                // Update the page with the radiator details
+                document.getElementById("name").textContent = "Name: " + data.name;
+                document.getElementById("price").textContent = "Price: " + data.price;
+                document.getElementById("heatedValue").textContent = "Heated Value: " + data.heatedValue;
+                document.getElementById("material").textContent = "Material: " + data.material;
+
+                // Set the image source to the image path
+                const imageUrl = `http://localhost:5000${data.imagePath}`;
+                document.getElementById("radiatorImage").src = imageUrl;
+            })
+            .catch(error => {
+                console.error("Error fetching radiator details:", error);
+                alert("An error occurred while fetching the data.");
+            });
+    }
+</script>
+
+
+
+
+
+</body>
+</html>

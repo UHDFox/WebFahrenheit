@@ -125,3 +125,15 @@ D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Pro
 D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\System.IO.Pipelines.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\System.Text.Json.dll
+D:\progs\projects\WebFahrenheit\Web\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll

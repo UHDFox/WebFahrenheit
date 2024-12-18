@@ -1,4 +1,4 @@
-using Application.WaterBoiler;
+using Application.Product.WaterBoiler;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Pump Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        #pumpDetails {
+            margin-top: 20px;
+        }
+        #pumpImage {
+            max-width: 500px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pump Details</h1>
+<button onclick="getPumpDetails()">Get Pump Details</button>
+
+<div id = "request">
+    <input name="productId" id="searchId">
+        
+    </input>
+</div>
+<div id="pumpDetails">
+    <h2>Details:</h2>
+    <p id="name">Name: </p>
+    <p id="price">Price: </p>
+    <p id="brand">Brand: </p>
+    <p id="pressure">Pressure: </p>
+    <p id="powerSupply">Power Supply: </p>
+    <h3>Image:</h3>
+    <img id="pumpImage" src="" alt="Pump Image">
+</div>
+
+<script>
+    function getPumpDetails() {
+        // Get the product ID entered by the user
+        const productId = document.getElementById("searchId").value;
+
+        // Check if product ID is provided
+        if (!productId) {
+            alert("Please enter a Product ID");
+            return;
+        }
+
+        // Construct the API URL using the entered product ID
+        const apiUrl = `http://localhost:5000/api/Pump/id:guid?id=${productId}`;
+
+        // Fetch the product details from the API
+        fetch(apiUrl)
+            .then(response => {
+                // Log the raw response text to debug
+                console.log('Raw response:', response);
+
+                // If the response is not OK, throw an error
+                if (!response.ok) {
+                    throw new Error('Pump not found');
+                }
+
+                // Log the response body (text) before parsing
+                return response.text().then(text => {
+                    console.log('Response text:', text);
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error('Failed to parse JSON:', e);
+                        throw new Error('Invalid JSON');
+                    }
+                });
+            })
+            .then(data => {
+                // Update the page with the pump details
+                document.getElementById("name").textContent = "Name: " + data.name;
+                document.getElementById("price").textContent = "Price: " + data.price;
+                document.getElementById("brand").textContent = "Brand: " + data.brand;
+                document.getElementById("pressure").textContent = "Pressure: " + data.pressure;
+                document.getElementById("powerSupply").textContent = "Power Supply: " + data.powerSupply;
+
+                // Set the image source to the image path
+                const imageUrl = `http://localhost:5000${data.imagePath}`;
+                document.getElementById("pumpImage").src = imageUrl;
+            })
+            .catch(error => {
+                console.error("Error fetching pump details:", error);
+                alert("An error occurred while fetching the data.");
+            });
+    }
+</script>
+
+</body>
+</html>

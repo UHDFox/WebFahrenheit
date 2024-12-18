@@ -33,7 +33,6 @@ namespace Web.Controllers
         }
 
         [HttpPost("createFeedback")]
-        [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin, User")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddUserMadeAsync(CreateFeedbackRequest request)
         {
