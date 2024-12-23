@@ -7,6 +7,7 @@ using Application.UserFeedback.User;
 using AutoMapper;
 using Domain.Domain.Entities.Products;
 using Domain.Domain.Entities.Users;
+using Domain.Domain.Enums;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Feedback;
 using Web.Contracts.Requests.Fireplace;
@@ -46,10 +47,30 @@ public class WebProfile : Profile
             ));
 
 
-        CreateMap<UpdateUserRequest, UserModel>().ReverseMap();
+        CreateMap<UpdateUserRequest, UserModel>()
+            .ConstructUsing(src =>
+                new UserModel(
+                    src.Id,
+                    src.Name,
+                    src.Password,
+                    src.Email,
+                    src.PhoneNumber,
+                    src.Role
+                )).ReverseMap();
         CreateMap<LoginRequest, LoginModel>();
+        
         CreateMap<RegisterRequest, RegisterModel>();
-        CreateMap<RegisterModel, UserModel>();
+        
+        CreateMap<RegisterModel, UserModel>()
+            .ConstructUsing(src =>
+                new UserModel(
+                    Guid.Empty,
+                    src.Name,
+                    src.Password,
+                    src.Email,
+                    src.PhoneNumber,
+                    UserRole.User
+                ));
 
         CreateMap<CreateFeedbackRequest, FeedbackModel>();
         CreateMap<FeedbackModel, FeedbackResponse>();
@@ -72,7 +93,8 @@ public class WebProfile : Profile
         CreateMap<PumpModel, PumpResponse>()
             .ConstructUsing(src => new PumpResponse(
                 src.Id, src.Name, src.Article, src.Price, src.Brand, src.Pressure, src.PowerSupply, src.Description,
-                src.ImagePath));
+                src.ImagePath ?? String.Empty));
+
         CreateMap<UpdatePumpRequest, PumpModel>()
             .ConstructUsing(request => new PumpModel(
                 request.Id,
@@ -111,7 +133,7 @@ public class WebProfile : Profile
         CreateMap<FireplaceModel, FireplaceResponse>()
             .ConstructUsing(src => new FireplaceResponse(
                 src.Id, src.Name, src.Article, src.Price, src.FuelUsage, src.FireLevel, src.Description,
-                src.ImagePath));
+                src.ImagePath ?? String.Empty));
 
         CreateMap<UpdateFireplaceRequest, FireplaceModel>()
             .ConstructUsing(src => new FireplaceModel(

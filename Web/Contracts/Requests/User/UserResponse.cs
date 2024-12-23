@@ -4,10 +4,6 @@ namespace Web.Contracts.Requests.User;
 
 public sealed class UserResponse
 {
-    public UserResponse()
-    {
-    }
-
     public UserResponse(Guid id, string name, string phoneNumber, string email, string password, UserRole role)
     {
         Id = id;

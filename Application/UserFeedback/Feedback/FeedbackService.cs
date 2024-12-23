@@ -32,8 +32,14 @@ public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRec
 
     public string ReturnNameFromToken()
     {
+        var httpContext = _httpContextAccessor.HttpContext;
+        if (httpContext == null)
+        {
+            throw new UnauthorizedAccessException("HttpContext is not available.");
+        }
+        
         // Retrieve the JWT token from the cookie 'some_cookie'
-        var token = _httpContextAccessor.HttpContext.Request.Cookies["some-cookie"];
+        var token = _httpContextAccessor.HttpContext!.Request.Cookies["some-cookie"] ?? string.Empty;
 
         if (string.IsNullOrEmpty(token))
         {
@@ -54,11 +60,6 @@ public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRec
         }
 
         var name = nameClaim.Value;
-
-        // Proceed to store feedback, using name and userId, then return a Guid
-
-        // Store the feedback (example: saving to database or a collection)
-        //await SaveFeedbackAsync(feedbackId, message, name, userId);
 
         return name;
     }

@@ -1,3 +1,4 @@
+using Application.Infrastructure.Exceptions;
 using Application.Infrastructure.Images;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +28,7 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
 
     public async Task<TModel> GetByIdAsync(Guid id)
     {
-        var result = await _repository.GetByIdAsync(id) ?? throw new Exception();
+        var result = await _repository.GetByIdAsync(id) ?? throw new NotFoundException("Product not found");
         return _mapper.Map<TModel>(result);
     }
 
@@ -36,7 +37,7 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
         var entity = _mapper.Map<TRecord>(model);
 
         entity.ImagePath =
-            await _imageService.SaveImageLocallyAsync(imageFile, typeof(TModel).Name.Replace("Model", ""));
+            await _imageService.SaveImageLocallyAsync(imageFile!, typeof(TModel).Name.Replace("Model", ""));
 
         var result = await _repository.AddAsync(entity);
 
@@ -49,7 +50,7 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
     {
         var entity = await _repository.GetByIdAsync(id);
         if (entity == null)
-            throw new Exception("Entity not found");
+            throw new NotFoundException("Entity not found");
 
         // Delete the image associated with this entity, if it exists
         if (!string.IsNullOrEmpty(entity.ImagePath))
@@ -67,7 +68,7 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
     public async Task<TModel> UpdateAsync(TModel model, IFormFile? imageFile)
     {
         var entity = await _repository.GetByIdAsync(model.Id)
-                     ?? throw new Exception("Entity not found");
+                     ?? throw new NotFoundException("Entity not found");
 
         var oldImagePath = entity.ImagePath;
 

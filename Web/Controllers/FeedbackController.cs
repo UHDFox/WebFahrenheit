@@ -25,7 +25,8 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddAsync(CreateFeedbackRequest req)
         {
-            var result = await _service.AddAsync(new FeedbackModel(new Guid(), req.Email, req.Message, req.UserId));
+            var feedBack = new FeedbackModel(Guid.NewGuid(), req.Email, req.Message, req.UserId);   
+            var result = await _service.AddAsync(feedBack);
             await _service.SaveChangesAsync();
 
             return Created($"{Request.Path}",

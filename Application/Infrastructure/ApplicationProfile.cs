@@ -2,6 +2,7 @@ using Application.Product.Fireplace;
 using Application.Product.Pump;
 using Application.Product.Radiator;
 using Application.Product.WaterBoiler;
+using Application.UserFeedback.Feedback;
 using Application.UserFeedback.User;
 using AutoMapper;
 using Domain.Domain.Entities.Products;
@@ -84,6 +85,10 @@ public class ApplicationProfile : Profile
                     src.PhoneNumber,
                     UserRole.User
                 ))
+            .ForMember(dest => dest.Id, opt => opt.Ignore());
+        
+        CreateMap<FeedbackModel, FeedbackRecord>()
+            .ConstructUsing(src => new FeedbackRecord(src.UserId, src.Message))
             .ForMember(dest => dest.Id, opt => opt.Ignore());
     }
 }

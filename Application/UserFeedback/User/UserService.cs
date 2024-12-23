@@ -27,7 +27,7 @@ internal sealed class UserService : CustomerService<UserModel, UserRecord>, IUse
         _passwordProvider = passwordProvider;
     }
 
-    public async Task<Guid> AddAsync(UserModel userModel)
+    public new async Task<Guid> AddAsync(UserModel userModel)
     {
         var entity = _mapper.Map<UserRecord>(userModel);
 
@@ -41,7 +41,7 @@ internal sealed class UserService : CustomerService<UserModel, UserRecord>, IUse
     public async Task<string> LoginAsync(LoginModel model, HttpContext context)
     {
         var user = await _repository.GetByEmailAsync(model.Email)
-                   ?? throw new Exception("can't login - user with stated mail not found");
+                   ?? throw new LoginException("can't login - user with stated mail not found");
 
         if (!_passwordProvider.Verify(model.Password, user.PasswordHash))
         {

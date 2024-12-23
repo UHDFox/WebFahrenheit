@@ -6,7 +6,8 @@ using Repository;
 namespace Application.UserFeedback;
 
 public abstract class CustomerService<TModel, TRecord> : ICustomerService<TModel>
-    where TModel : CustomerItem where TRecord : IUserFeedback
+    where TModel : CustomerItem 
+    where TRecord : IUserFeedback
 {
     private readonly IMapper _mapper;
     private readonly IRepository<TRecord> _repository;
@@ -26,7 +27,7 @@ public abstract class CustomerService<TModel, TRecord> : ICustomerService<TModel
 
     public async Task<TModel> GetByIdAsync(Guid id)
     {
-        var result = await _repository.GetByIdAsync(id) ?? throw new Exception();
+        var result = await _repository.GetByIdAsync(id) ?? throw new NotFoundException("Product not found");
         return _mapper.Map<TModel>(result);
     }
 
