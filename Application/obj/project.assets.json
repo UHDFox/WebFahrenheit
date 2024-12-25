@@ -2053,11 +2053,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\progs\\projects\\WebFahrenheit\\Application\\Application.csproj",
+      "projectUniqueName": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "D:\\progs\\projects\\WebFahrenheit\\Application\\Application.csproj",
+      "projectPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\000\\.nuget\\packages\\",
-      "outputPath": "D:\\progs\\projects\\WebFahrenheit\\Application\\obj\\",
+      "outputPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
@@ -2076,11 +2076,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\progs\\projects\\WebFahrenheit\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\progs\\projects\\WebFahrenheit\\Domain\\Domain.csproj"
+            "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Domain\\Domain.csproj"
             },
-            "D:\\progs\\projects\\WebFahrenheit\\Repository\\Repository.csproj": {
-              "projectPath": "D:\\progs\\projects\\WebFahrenheit\\Repository\\Repository.csproj"
+            "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Repository\\Repository.csproj": {
+              "projectPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Repository\\Repository.csproj"
             }
           }
         }
