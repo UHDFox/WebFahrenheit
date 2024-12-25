@@ -2553,11 +2553,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\progs\\projects\\WebFahrenheit\\Domain\\Domain.csproj",
+      "projectUniqueName": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "D:\\progs\\projects\\WebFahrenheit\\Domain\\Domain.csproj",
+      "projectPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\000\\.nuget\\packages\\",
-      "outputPath": "D:\\progs\\projects\\WebFahrenheit\\Domain\\obj\\",
+      "outputPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [

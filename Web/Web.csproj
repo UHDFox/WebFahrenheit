@@ -5,6 +5,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+        <AssemblyTitle>FahrenheitWebApp</AssemblyTitle>
+        <AssemblyCompany>Fahrenheit</AssemblyCompany>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,10 +22,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Application\Application.csproj"/>
-        <ProjectReference Include="..\Domain\Domain.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Domain\Domain.csproj"/>
     </ItemGroup>
 
