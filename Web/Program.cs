@@ -3,6 +3,7 @@ using Application.Infrastructure;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Repository.Infrastructure;
+using Serilog;
 using Web.Infrastructure;
 using Web.Infrastructure.Authentication;
 
@@ -29,6 +30,8 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
+
+
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -62,6 +65,8 @@ builder.Services.AddControllers();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddRepositories();
 builder.Services.AddJwtAuthentication();
+builder.Services.AddSerilog();
+
 builder.Services.AddDbContext<FahrenheitContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Psql")));
 
@@ -82,5 +87,7 @@ app.UseAuthorization();
 app.ConfigureStaticFilesUpload();
 app.UseHttpsRedirection();
 app.MapControllers();
+
+Log.Logger.Information("Application started");
 
 app.Run();

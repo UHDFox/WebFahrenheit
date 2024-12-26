@@ -1,4 +1,5 @@
 using Microsoft.Extensions.FileProviders;
+using Serilog;
 
 namespace Web.Infrastructure;
 
@@ -31,5 +32,17 @@ public static class ServiceCollectionExtension
                 policyBuilder.AllowAnyOrigin();
             });
         });
+    }
+
+    public static void AddSerilog(this IServiceCollection services)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Verbose()
+            .WriteTo.Async(a => a.Console(
+                outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}"))
+            .WriteTo.Async(a => a.File("/app/logs/log.txt", rollingInterval: RollingInterval.Day)) // Write to a file in /app/logs
+            .CreateLogger();
+        
+        services.AddSingleton(Log.Logger);
     }
 }

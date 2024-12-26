@@ -2,6 +2,7 @@ using Application.Product.Radiator;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using Web.Contracts.CommonResponses;
 using Web.Contracts.Requests.Radiator;
 using Web.Contracts.Requests.Radiator.Requests;
@@ -14,12 +15,14 @@ namespace Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRadiatorService _radiatorService;
+        private readonly ILogger<RadiatorController> _logger;
 
 
-        public RadiatorController(IMapper mapper, IRadiatorService radiatorService)
+        public RadiatorController(IMapper mapper, IRadiatorService radiatorService, ILogger<RadiatorController> logger)
         {
             _mapper = mapper;
             _radiatorService = radiatorService;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -50,11 +53,19 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
-            var result = await _radiatorService.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
-            return Ok(new GetAllResponse<RadiatorResponse>(_mapper.Map<IReadOnlyCollection<RadiatorResponse>>(result),
-                result.Count));
+            Log.Logger.Information($"Received request: offset={offset}, limit={limit}");
+            try
+            {
+                var result = await _radiatorService.GetListAsync(offset.GetValueOrDefault(), limit.GetValueOrDefault());
+                Log.Logger.Information("Request processed successfully.");
+                return Ok(new GetAllResponse<RadiatorResponse>(_mapper.Map<IReadOnlyCollection<RadiatorResponse>>(result), result.Count));
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex, "Error in GetListAsync");
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
         }
-
 
         [HttpPut]
         [Authorize(Roles = "SuperAdmin, HighLevelAdmin")]
