@@ -37,12 +37,29 @@ public static class ServiceCollectionExtension
     public static void AddSerilog(this IServiceCollection services)
     {
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Verbose()
+            .MinimumLevel.Information()
+            .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", Serilog.Events.LogEventLevel.Warning)
+            .MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning)
+            .MinimumLevel.Override("Microsoft.Hosting.Lifetime", Serilog.Events.LogEventLevel.Warning)
             .WriteTo.Async(a => a.Console(
                 outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}"))
-            .WriteTo.Async(a => a.File("/app/logs/log.txt", rollingInterval: RollingInterval.Day)) // Write to a file in /app/logs
+            .WriteTo.Async(a => a.File("/app/logs/log.txt", rollingInterval: RollingInterval.Day))
             .CreateLogger();
-        
-        services.AddSingleton(Log.Logger);
+
+        services.AddLogging(logging =>
+        {
+            logging.AddSerilog();
+            
+            logging.AddFilter("Microsoft.AspNetCore", LogLevel.Warning); 
+            logging.AddFilter("Microsoft.AspNetCore.Hosting", LogLevel.Warning); 
+            logging.AddFilter("Microsoft.AspNetCore.DataProtection", LogLevel.Error); // Suppress data protection warnings
+            logging.AddFilter("Microsoft.AspNetCore.Diagnostics", LogLevel.Warning);
+            logging.AddFilter("Microsoft.AspNetCore.Routing", LogLevel.Warning); 
+            logging.AddFilter("Microsoft.AspNetCore.Mvc", LogLevel.Warning); 
+            
+            logging.AddFilter("Microsoft.EntityFrameworkCore", LogLevel.Warning); 
+            logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning); 
+        });
     }
+    
 }
