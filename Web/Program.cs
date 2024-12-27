@@ -60,6 +60,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+builder.Services.AddFahrenheitDbContext();
 builder.Services.AddBusinessServices();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -68,8 +69,6 @@ builder.Services.AddJwtAuthentication();
 builder.Services.AddSerilog();
 builder.Configuration.AddEnvironmentVariables();
 builder.WebHost.UseUrls(builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5000");
-builder.Services.AddDbContext<FahrenheitContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Psql")));
 
 builder.Services.ConfigureCORSPolicy();
 

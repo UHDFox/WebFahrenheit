@@ -1,3 +1,6 @@
+using Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.FileProviders;
 using Serilog;
 
@@ -5,6 +8,15 @@ namespace Web.Infrastructure;
 
 public static class ServiceCollectionExtension
 {
+    public static void AddFahrenheitDbContext(this IServiceCollection services)
+    {
+        services.AddDbContext<FahrenheitContext>((provider, builder) =>
+        {
+            builder.UseNpgsql(provider.GetRequiredService<IConfiguration>().GetConnectionString("Psql"));
+            builder.ConfigureWarnings(
+                warnings => warnings.Ignore(CoreEventId.RowLimitingOperationWithoutOrderByWarning));
+        });
+    }
     public static void ConfigureStaticFilesUpload(this IApplicationBuilder app)
     {
         var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
