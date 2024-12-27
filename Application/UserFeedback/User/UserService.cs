@@ -3,6 +3,7 @@ using Application.Infrastructure.Exceptions;
 using AutoMapper;
 using Domain.Domain.Entities.Users;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Repository.User;
 
 namespace Application.UserFeedback.User;
@@ -13,18 +14,21 @@ internal sealed class UserService : CustomerService<UserModel, UserRecord>, IUse
     private readonly IUserRepository _repository;
     private readonly IJwtProvider _jwtProvider;
     private readonly IPasswordProvider _passwordProvider;
+    private ILogger<UserService> _logger;
 
     public UserService(
         IMapper mapper,
         IUserRepository repository,
         IJwtProvider jwtProvider,
-        IPasswordProvider passwordProvider)
-        : base(repository, mapper)
+        IPasswordProvider passwordProvider,
+        ILogger<UserService> logger)
+        : base(repository, mapper, logger)
     {
         _mapper = mapper;
         _repository = repository;
         _jwtProvider = jwtProvider;
         _passwordProvider = passwordProvider;
+        _logger = logger;
     }
 
     public new async Task<Guid> AddAsync(UserModel userModel)
@@ -34,17 +38,25 @@ internal sealed class UserService : CustomerService<UserModel, UserRecord>, IUse
         entity.PasswordHash = _passwordProvider.Generate(userModel.Password);
 
         var result = await _repository.AddAsync(_mapper.Map<UserRecord>(entity));
+        
+        _logger.LogInformation($"Created new user with id {result}");
 
         return result;
     }
 
     public async Task<string> LoginAsync(LoginModel model, HttpContext context)
     {
-        var user = await _repository.GetByEmailAsync(model.Email)
-                   ?? throw new LoginException("can't login - user with stated mail not found");
+        var user = await _repository.GetByEmailAsync(model.Email);
+        
+        if (user == null)
+        {
+            _logger.LogError($"User with email {model.Email} does not exist");
+            throw new LoginException("can't login - user with stated mail not found");
+        }
 
         if (!_passwordProvider.Verify(model.Password, user.PasswordHash))
         {
+            _logger.LogError($"User with email {model.Email} does not match password: {model.Password}");
             throw new LoginException("Password mismatch");
         }
 
@@ -64,6 +76,10 @@ internal sealed class UserService : CustomerService<UserModel, UserRecord>, IUse
 
     public async Task<Guid> RegisterAsync(RegisterModel model)
     {
-        return await AddAsync(_mapper.Map<UserModel>(model));
+        var result = await AddAsync(_mapper.Map<UserModel>(model));
+        
+        _logger.LogInformation($"Registered new user with id {result}");
+
+        return result;
     }
 }

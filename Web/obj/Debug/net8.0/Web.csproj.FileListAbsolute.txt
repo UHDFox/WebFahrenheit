@@ -137,3 +137,11 @@ D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\refint\Web.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\Web.pdb
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\Web.genruntimeconfig.cache
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\ref\Web.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.Async.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.File.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll

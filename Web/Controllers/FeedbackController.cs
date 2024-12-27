@@ -11,13 +11,15 @@ namespace Web.Controllers
     [Route("api/[controller]")]
     public class FeedbackController : Controller
     {
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
         private readonly IFeedbackService _service;
+        private readonly ILogger<FeedbackController> _logger;
 
-        public FeedbackController(IMapper mapper, IFeedbackService service)
+        public FeedbackController(IMapper mapper, IFeedbackService service, ILogger<FeedbackController> logger)
         {
-            this.mapper = mapper;
+            _mapper = mapper;
             _service = service;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -30,14 +32,15 @@ namespace Web.Controllers
             await _service.SaveChangesAsync();
 
             return Created($"{Request.Path}",
-                mapper.Map<FeedbackResponse>(await _service.GetByIdAsync(result)));
+                _mapper.Map<FeedbackResponse>(await _service.GetByIdAsync(result)));
         }
 
         [HttpPost("createFeedback")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> AddUserMadeAsync(CreateFeedbackRequest request)
+        public async Task<ActionResult<Guid>> AddFromRegistrationRequest(CreateFeedbackRequest request)
         {
             Guid result;
+
             if (!string.IsNullOrEmpty(request.Email))
             {
                 result = await _service.AddUsingEmail(new FeedbackModel(new Guid(), request.Email, request.Message,
@@ -51,7 +54,7 @@ namespace Web.Controllers
 
             var feedback = await _service.GetByIdAsync(result);
 
-            return Created($"{Request.Path}", mapper.Map<FeedbackResponse>(feedback));
+            return Created($"{Request.Path}", _mapper.Map<FeedbackResponse>(feedback));
         }
 
         [HttpGet("id:guid")]
@@ -60,17 +63,25 @@ namespace Web.Controllers
         {
             var result = await _service.GetByIdAsync(id);
 
-            return Ok(mapper.Map<FeedbackResponse>(result));
+            return Ok(_mapper.Map<FeedbackResponse>(result));
         }
 
         [HttpGet]
         [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
         public async Task<IActionResult> GetListAsync(int? offset = 0, int? limit = 5)
         {
-            var result = await _service.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5));
-
-            return Ok(new GetAllResponse<FeedbackResponse>(mapper.Map<IReadOnlyCollection<FeedbackResponse>>(result),
-                result.Count));
+            _logger.LogInformation($"Received request for feedbacks: offset={offset}, limit={limit}");
+            try
+            {
+                var result = await _service.GetListAsync(offset.GetValueOrDefault(), limit.GetValueOrDefault());
+                _logger.LogInformation("Request processed successfully.");
+                return Ok(new GetAllResponse<FeedbackResponse>(_mapper.Map<IReadOnlyCollection<FeedbackResponse>>(result), result.Count));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in GetListAsync");
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
         }
 
         [HttpPut]

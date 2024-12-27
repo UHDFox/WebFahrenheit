@@ -3,6 +3,7 @@ using Application.Infrastructure;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Repository.Infrastructure;
+using Serilog;
 using Web.Infrastructure;
 using Web.Infrastructure.Authentication;
 
@@ -11,15 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-/*builder.Services.AddCors(opts =>
+builder.Services.AddCors(opts =>
     opts.AddPolicy("ApiCorsPolicy",
         policy =>
         {
-            policy.WithOrigins("http://localhost:7045", "http://localhost:5000", "http:/front")
+            policy.WithOrigins("http://localhost:7045", "http://localhost:5000")
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
-        }));*/
+        }));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
@@ -29,6 +30,8 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
+
+
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -57,19 +60,20 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+builder.Services.AddFahrenheitDbContext();
 builder.Services.AddBusinessServices();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddRepositories();
 builder.Services.AddJwtAuthentication();
-builder.Services.AddDbContext<FahrenheitContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Psql")));
+builder.Services.AddSerilog();
+builder.Configuration.AddEnvironmentVariables();
+builder.WebHost.UseUrls(builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5000");
 
 builder.Services.ConfigureCORSPolicy();
 
 var app = builder.Build();
-//app.UseCors("ApiCorsPolicy");
-app.UseCors("AllowAll");
+app.UseCors("ApiCorsPolicy");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -77,10 +81,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<LoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.ConfigureStaticFilesUpload();
 app.UseHttpsRedirection();
 app.MapControllers();
+
+Log.Logger.Information("Application started");
 
 app.Run();

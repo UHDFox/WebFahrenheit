@@ -1,10 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
-using Application.Infrastructure.Exceptions;
 using AutoMapper;
 using Domain;
 using Domain.Domain.Entities.Users;
 using Domain.Domain.Enums;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Repository.Feedback;
 using Repository.User;
 
@@ -12,17 +12,15 @@ namespace Application.UserFeedback.Feedback;
 
 public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRecord>, IFeedbackService
 {
-    private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IUserRepository _userRepository;
     private readonly IFeedbackRepository _feedbackRepository;
     public readonly FahrenheitContext _context;
 
     public FeedbackService(IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository,
-        IFeedbackRepository feedbackRepository, FahrenheitContext context)
-        : base(feedbackRepository, mapper)
+        IFeedbackRepository feedbackRepository, ILogger<FeedbackService> logger, FahrenheitContext context)
+        : base(feedbackRepository, mapper, logger)
     {
-        _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
         _userRepository = userRepository;
         _feedbackRepository = feedbackRepository;

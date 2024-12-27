@@ -14,13 +14,15 @@ namespace Web.Controllers;
 [Route("api/v1/[controller]")]
 public sealed class UserController : Controller
 {
-    private readonly IUserService userService;
+    private readonly ILogger<UserController> _logger;
     private readonly IMapper mapper;
+    private readonly IUserService userService;
 
-    public UserController(IUserService userService, IMapper mapper)
+    public UserController(IUserService userService, IMapper mapper, ILogger<UserController> logger)
     {
         this.userService = userService;
         this.mapper = mapper;
+        _logger = logger;
     }
 
     [HttpPost("login")]
@@ -28,10 +30,7 @@ public sealed class UserController : Controller
     {
         var token = await userService.LoginAsync(mapper.Map<LoginModel>(request), HttpContext);
 
-        if (string.IsNullOrEmpty(token))
-        {
-            return Unauthorized("Invalid credentials");
-        }
+        if (string.IsNullOrEmpty(token)) return Unauthorized("Invalid credentials");
 
         return Ok(token);
     }
@@ -51,18 +50,29 @@ public sealed class UserController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetListAsync(int? offset, int? limit)
     {
-        var result = mapper.Map<IReadOnlyCollection<UserResponse>>
-            (await userService.GetListAsync(offset.GetValueOrDefault(0), limit.GetValueOrDefault(5)));
-
-        return Ok(new GetAllResponse<UserResponse>(result, result.Count));
+        _logger.LogInformation($"Received request for users: offset={offset}, limit={limit}");
+        try
+        {
+            var result = await userService.GetListAsync(offset.GetValueOrDefault(), limit.GetValueOrDefault());
+            _logger.LogInformation("Request processed successfully.");
+            return Ok(new GetAllResponse<UserRecord>(mapper.Map<IReadOnlyCollection<UserRecord>>(result),
+                result.Count));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error in GetListAsync");
+            return StatusCode(500, "An error occurred while processing the request.");
+        }
     }
 
     [HttpGet("id:guid")]
     [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserRecord))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetByIdAsync(Guid id) =>
-        Ok(mapper.Map<UserResponse>(await userService.GetByIdAsync(id)));
+    public async Task<IActionResult> GetByIdAsync(Guid id)
+    {
+        return Ok(mapper.Map<UserResponse>(await userService.GetByIdAsync(id)));
+    }
 
     [HttpPost]
     [Authorize(Roles = "SuperAdmin, HighLevelAdmin, LowLevelAdmin")]
