@@ -18,6 +18,32 @@
           }
         }
       },
+      "Contracts/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Contracts.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Contracts.dll": {}
+        }
+      },
+      "FahrenheitAuthService.Client/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "Serilog.Extensions.Logging": "9.0.0",
+          "Serilog.Settings.Configuration": "9.0.0",
+          "Serilog.Sinks.Async": "2.1.0",
+          "Serilog.Sinks.Console": "6.0.0",
+          "Serilog.Sinks.File": "6.0.0"
+        },
+        "compile": {
+          "lib/net8.0/FahrenheitAuthService.Client.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/FahrenheitAuthService.Client.dll": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1388,6 +1414,7 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Domain": "1.0.0",
+          "FahrenheitAuthService.Client": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.10",
           "Microsoft.AspNetCore.OpenApi": "8.0.10",
           "Microsoft.EntityFrameworkCore": "8.0.10",
@@ -1421,7 +1448,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Domain": "1.0.0"
+          "Domain": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0"
         },
         "compile": {
           "bin/placeholder/Repository.dll": {}
@@ -1446,6 +1474,28 @@
         "icon.png",
         "lib/net6.0/AutoMapper.dll",
         "lib/net6.0/AutoMapper.xml"
+      ]
+    },
+    "Contracts/1.0.0": {
+      "sha512": "W0H+248sitdzpi1XXMpJGZfkNiAX4Rfcv22lwJsriu6TOmLnVqJ32ywkqi9VT450szmOcqoPq6pfFmQXruFvWQ==",
+      "type": "package",
+      "path": "contracts/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "contracts.1.0.0.nupkg.sha512",
+        "contracts.nuspec",
+        "lib/net8.0/Contracts.dll"
+      ]
+    },
+    "FahrenheitAuthService.Client/1.0.0": {
+      "sha512": "+o9OOqXvRuuaGYa9pM+j1TjrcnaUgfmBr/15Sh62iBUcMM90ukzIa3UoNhTWGdTE8Kqhq+WefOn6dfvG2xwH0Q==",
+      "type": "package",
+      "path": "fahrenheitauthservice.client/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "fahrenheitauthservice.client.1.0.0.nupkg.sha512",
+        "fahrenheitauthservice.client.nuspec",
+        "lib/net8.0/FahrenheitAuthService.Client.dll"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -3791,6 +3841,7 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
+        "D:\\progs\\projects\\fahrenheit\\nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

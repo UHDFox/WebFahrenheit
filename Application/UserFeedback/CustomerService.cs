@@ -61,6 +61,8 @@ public abstract class CustomerService<TModel, TRecord> : ICustomerService<TModel
 
             var result = await _repository.DeleteAsync(id);
 
+            await _repository.SaveChangesAsync();
+
             _logger.LogInformation(result
                 ? $"Deleted record with Id: {id} in {typeof(TModel).Name}"
                 : $"Could not delete record with id: {id} in {typeof(TModel).Name}");
@@ -102,6 +104,4 @@ public abstract class CustomerService<TModel, TRecord> : ICustomerService<TModel
             throw;
         }
     }
-
-    public async Task<int> SaveChangesAsync() => await _repository.SaveChangesAsync();
 }

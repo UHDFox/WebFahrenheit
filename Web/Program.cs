@@ -1,7 +1,6 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Application.Infrastructure;
-using Domain;
-using Microsoft.EntityFrameworkCore;
 using Repository.Infrastructure;
 using Serilog;
 using Web.Infrastructure;
@@ -61,7 +60,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 builder.Services.AddFahrenheitDbContext();
-builder.Services.AddBusinessServices();
+builder.Services.AddBusinessServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddRepositories();

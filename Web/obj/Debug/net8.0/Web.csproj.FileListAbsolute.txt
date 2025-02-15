@@ -145,3 +145,5 @@ D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.Co
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.File.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Contracts.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\FahrenheitAuthService.Client.dll

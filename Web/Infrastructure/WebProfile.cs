@@ -206,5 +206,7 @@ public class WebProfile : Profile
                 src.Description,
                 null
             ));
+        
+        CreateMap<UserModel, UserResponse>().ReverseMap();
     }
 }

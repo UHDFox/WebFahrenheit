@@ -5,6 +5,8 @@ using Application.Product.WaterBoiler;
 using Application.UserFeedback.Feedback;
 using Application.UserFeedback.User;
 using AutoMapper;
+using Contracts.Contracts.CommonResponses;
+using Contracts.Contracts.User;
 using Domain.Domain.Entities.Products;
 using Domain.Domain.Entities.Users;
 using Domain.Domain.Enums;
@@ -58,37 +60,12 @@ public class ApplicationProfile : Profile
                 src.Material,
                 src.Description
             )).ReverseMap();
-
-        // User mappings
-        CreateMap<UserModel, UserRecord>()
-            .ConstructUsing(src =>
-                new UserRecord(src.Name, src.Password, src.Email, src.PhoneNumber, UserRole.User));
-
-        CreateMap<UserRecord, UserModel>()
-            .ConstructUsing(src =>
-                new UserModel(
-                    src.Id,
-                    src.Name,
-                    src.PasswordHash,
-                    src.Email,
-                    src.PhoneNumber,
-                    src.Role
-                ));
-
-        CreateMap<RegisterModel, UserModel>()
-            .ConstructUsing(src =>
-                new UserModel(
-                    Guid.NewGuid(),
-                    src.Name,
-                    src.Password,
-                    src.Email,
-                    src.PhoneNumber,
-                    UserRole.User
-                ))
-            .ForMember(dest => dest.Id, opt => opt.Ignore());
         
         CreateMap<FeedbackModel, FeedbackRecord>()
             .ConstructUsing(src => new FeedbackRecord(src.UserId, src.Message))
             .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+        CreateMap<GetAllResponse<UserResponse>, IReadOnlyCollection<UserModel>>().ReverseMap();
+        CreateMap<UserResponse, UserModel>().ReverseMap();
     }
 }

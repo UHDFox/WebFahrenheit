@@ -29,7 +29,6 @@ namespace Web.Controllers
         {
             var feedBack = new FeedbackModel(Guid.NewGuid(), req.Email, req.Message, req.UserId);   
             var result = await _service.AddAsync(feedBack);
-            await _service.SaveChangesAsync();
 
             return Created($"{Request.Path}",
                 _mapper.Map<FeedbackResponse>(await _service.GetByIdAsync(result)));
@@ -39,7 +38,7 @@ namespace Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> AddFromRegistrationRequest(CreateFeedbackRequest request)
         {
-            Guid result;
+            Guid result = Guid.Empty;
 
             if (!string.IsNullOrEmpty(request.Email))
             {
@@ -92,8 +91,6 @@ namespace Web.Controllers
 
 
             var result = await _service.UpdateAsync(new FeedbackModel(req.Id, "", req.Message, req.UserId));
-
-            await _service.SaveChangesAsync();
 
             return Ok(new UpdatedResponse(result.Id));
         }

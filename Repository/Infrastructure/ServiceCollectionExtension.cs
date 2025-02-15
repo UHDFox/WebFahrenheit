@@ -3,7 +3,6 @@ using Repository.Feedback;
 using Repository.Fireplace;
 using Repository.Pump;
 using Repository.Radiator;
-using Repository.User;
 using Repository.WaterBoiler;
 
 namespace Repository.Infrastructure;
@@ -16,7 +15,6 @@ public static class ServiceCollectionExtension
         services.AddTransient<IWaterBoilerRepository, WaterBoilerRepository>();
         services.AddTransient<IRadiatorRepository, RadiatorRepository>();
         services.AddTransient<IPumpRepository, PumpRepository>();
-        services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IFeedbackRepository, FeedbackRepository>();
 
 
