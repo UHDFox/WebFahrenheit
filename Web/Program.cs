@@ -1,7 +1,6 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Application.Infrastructure;
-using Domain;
-using Microsoft.EntityFrameworkCore;
 using Repository.Infrastructure;
 using Serilog;
 using Web.Infrastructure;
@@ -61,7 +60,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 builder.Services.AddFahrenheitDbContext();
-builder.Services.AddBusinessServices();
+builder.Services.AddBusinessServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddRepositories();
@@ -69,10 +68,10 @@ builder.Services.AddJwtAuthentication();
 builder.Services.AddSerilog();
 builder.Configuration.AddEnvironmentVariables();
 builder.WebHost.UseUrls(builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5000");
-
 builder.Services.ConfigureCORSPolicy();
 
 var app = builder.Build();
+app.ApplyMigrations();
 app.UseCors("ApiCorsPolicy");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -80,7 +79,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseMiddleware<LoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();

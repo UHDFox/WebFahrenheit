@@ -1,85 +1,115 @@
-﻿using Application.Infrastructure.Authentication;
+﻿using System.Collections.ObjectModel;
+using Application.Infrastructure.Authentication;
 using Application.Infrastructure.Exceptions;
 using AutoMapper;
+using Contracts.Contracts.User;
 using Domain.Domain.Entities.Users;
-using Microsoft.AspNetCore.Http;
+using FahrenheitAuthService.Client;
 using Microsoft.Extensions.Logging;
-using Repository.User;
 
 namespace Application.UserFeedback.User;
 
-internal sealed class UserService : CustomerService<UserModel, UserRecord>, IUserService
+internal sealed class UserService : IUserService
 {
     private readonly IMapper _mapper;
-    private readonly IUserRepository _repository;
     private readonly IJwtProvider _jwtProvider;
     private readonly IPasswordProvider _passwordProvider;
     private ILogger<UserService> _logger;
-
+    private IAuthClient _authClient;
+    
     public UserService(
         IMapper mapper,
-        IUserRepository repository,
         IJwtProvider jwtProvider,
         IPasswordProvider passwordProvider,
-        ILogger<UserService> logger)
-        : base(repository, mapper, logger)
+        ILogger<UserService> logger,
+            IAuthClient client)
     {
         _mapper = mapper;
-        _repository = repository;
         _jwtProvider = jwtProvider;
         _passwordProvider = passwordProvider;
         _logger = logger;
+        _authClient = client;
     }
 
-    public new async Task<Guid> AddAsync(UserModel userModel)
+    public async Task<Guid> AddAsync(UserModel userModel)
     {
         var entity = _mapper.Map<UserRecord>(userModel);
 
         entity.PasswordHash = _passwordProvider.Generate(userModel.Password);
 
-        var result = await _repository.AddAsync(_mapper.Map<UserRecord>(entity));
+        var result = await _authClient.AddAsync(_mapper.Map<CreateUserRequest>(entity));
         
         _logger.LogInformation($"Created new user with id {result}");
 
-        return result;
+        return result.Id;
     }
 
-    public async Task<string> LoginAsync(LoginModel model, HttpContext context)
-    {
-        var user = await _repository.GetByEmailAsync(model.Email);
-        
-        if (user == null)
-        {
-            _logger.LogError($"User with email {model.Email} does not exist");
-            throw new LoginException("can't login - user with stated mail not found");
-        }
+     public async Task<IReadOnlyCollection<UserModel>> GetListAsync(int offset, int limit)
+     {
+         var result = await _authClient.GetListAsync(offset, limit);
 
-        if (!_passwordProvider.Verify(model.Password, user.PasswordHash))
-        {
-            _logger.LogError($"User with email {model.Email} does not match password: {model.Password}");
-            throw new LoginException("Password mismatch");
-        }
-
-        var token = _jwtProvider.GenerateToken(user);
-
-        var cookieOptions = new CookieOptions
-        {
-            HttpOnly = true,
-            SameSite = SameSiteMode.Strict,
-            Expires = DateTime.UtcNow.AddMinutes(20)
-        };
-
-        context.Response.Cookies.Append("some-cookie", token, cookieOptions);
-
-        return token;
+        return result.List.Select(_mapper.Map<UserModel>).ToList();
     }
 
-    public async Task<Guid> RegisterAsync(RegisterModel model)
+    public async Task<UserModel> GetByIdAsync(Guid id)
     {
-        var result = await AddAsync(_mapper.Map<UserModel>(model));
+        var record = await _authClient.GetByIdAsync(id);
+        if (record == null)
+        {
+            _logger.LogError($"Record with id: {id} not found in {typeof(UserModel).Name}");
+            throw new NotFoundException($"Record not found in {typeof(UserModel).Name}");
+        }
         
-        _logger.LogInformation($"Registered new user with id {result}");
+        _logger.LogInformation($"Retrieved record with id: {id} in {typeof(UserModel).Name}");
+        
+        return _mapper.Map<UserModel>(record);
+    }
 
-        return result;
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        try
+        {
+            await GetByIdAsync(id);
+
+            var result = await _authClient.DeleteAsync(id);
+
+            _logger.LogInformation(result
+                ? $"Deleted record with Id: {id} in {typeof(UserModel).Name}"
+                : $"Could not delete record with id: {id} in {typeof(UserModel).Name}");
+
+            return result;
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError($"An error occurred while deleting record with Id: {id}, Message: {ex.Message}");
+            return false;
+        }
+    }
+
+    public async Task<UserModel> UpdateAsync(UserModel userModel)
+    {
+        try
+        {
+            var entity = await _authClient.GetByIdAsync(userModel.Id);
+
+            if (entity == null)
+            {
+                _logger.LogError($"Record with id: {userModel.Id} not found in {typeof(UserModel).Name} while updating");
+                throw new NotFoundException($"Record with entity{userModel.Id} not found in {typeof(UserModel).Name}");
+            }
+
+            _mapper.Map(userModel, entity);
+
+            await _authClient.UpdateAsync(_mapper.Map<UpdateUserRequest>(entity));
+
+            _logger.LogInformation($"Successfully updated record with id: {userModel.Id} in {typeof(UserModel).Name}");
+
+            return userModel;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"An error occured while updating entity with id: {userModel.Id}, \n Message: {ex.Message}");
+            throw;
+        }
     }
 }

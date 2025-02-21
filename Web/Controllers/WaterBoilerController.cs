@@ -59,7 +59,7 @@ public class WaterBoilerController : Controller
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in GetListAsync");
+            _logger.LogError(ex.Message, "Error in GetListAsync");
             return StatusCode(500, "An error occurred while processing the request.");
         }
     }

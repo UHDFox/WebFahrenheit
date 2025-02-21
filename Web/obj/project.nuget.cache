@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GKAMKWzy6ng=",
+  "dgSpecHash": "Jgv1rjJgKjE=",
   "success": true,
   "projectFilePath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Web\\Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\000\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\000\\.nuget\\packages\\contracts\\1.0.0\\contracts.1.0.0.nupkg.sha512",
+    "C:\\Users\\000\\.nuget\\packages\\fahrenheitauthservice.client\\1.0.0\\fahrenheitauthservice.client.1.0.0.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.10\\microsoft.aspnetcore.authentication.jwtbearer.8.0.10.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.10\\microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",

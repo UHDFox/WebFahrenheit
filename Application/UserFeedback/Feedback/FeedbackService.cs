@@ -1,30 +1,29 @@
 using System.IdentityModel.Tokens.Jwt;
 using AutoMapper;
-using Domain;
 using Domain.Domain.Entities.Users;
 using Domain.Domain.Enums;
+using FahrenheitAuthService.Client.Implemetations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Repository.Feedback;
-using Repository.User;
 
 namespace Application.UserFeedback.Feedback;
 
 public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRecord>, IFeedbackService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly IUserRepository _userRepository;
     private readonly IFeedbackRepository _feedbackRepository;
-    public readonly FahrenheitContext _context;
+    private readonly AuthClient _client;
+    private readonly IMapper _mapper;
 
-    public FeedbackService(IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository,
-        IFeedbackRepository feedbackRepository, ILogger<FeedbackService> logger, FahrenheitContext context)
+    public FeedbackService(IMapper mapper, IHttpContextAccessor httpContextAccessor,
+        IFeedbackRepository feedbackRepository, ILogger<FeedbackService> logger, AuthClient client)
         : base(feedbackRepository, mapper, logger)
     {
         _httpContextAccessor = httpContextAccessor;
-        _userRepository = userRepository;
         _feedbackRepository = feedbackRepository;
-        _context = context;
+        _client = client;
+        _mapper = mapper;
     }
 
 
@@ -61,13 +60,11 @@ public sealed class FeedbackService : CustomerService<FeedbackModel, FeedbackRec
 
         return name;
     }
-
+    
     public async Task<Guid> AddUsingEmail(FeedbackModel model)
     {
-        var user = await _userRepository.GetByEmailAsync(model.Email!)
-                   ?? new UserRecord("", "", "", "", UserRole.User);
-        user.Id = _context.Users.First().Id;
-
+        var user = _mapper.Map<UserRecord>(await _client.GetByEmailAsync(model.Email!));
+        
         var feedback = new FeedbackRecord(user.Id, model.Message);
 
         var result = await _feedbackRepository.AddAsync(feedback);

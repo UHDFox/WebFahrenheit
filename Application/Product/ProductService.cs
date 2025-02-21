@@ -125,6 +125,4 @@ public abstract class ProductService<TModel, TRecord> : IProductService<TModel>
         
         return model;
     }
-
-    public async Task<int> SaveChangesAsync() => await _repository.SaveChangesAsync();
 }

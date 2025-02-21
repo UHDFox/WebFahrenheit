@@ -7,6 +7,4 @@ public interface IService<TModel> where TModel : TObject
     public Task<TModel> GetByIdAsync(Guid id);
 
     public Task<bool> DeleteAsync(Guid id);
-
-    public Task<int> SaveChangesAsync();
 }

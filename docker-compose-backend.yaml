@@ -1,0 +1,54 @@
+version: '3.8'
+
+
+services:
+  backend:
+    image: fahrenheitbackimage
+    build:
+      context: ..
+      dockerfile: /WebFahrenheit/Dockerfile
+    ports: 
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:5000
+    networks:
+      - fahrenheit_network
+    volumes:
+      - ./logs:/app/logs
+      
+  frontend:
+    image: fahrenheitfrontimage
+    build: 
+      context: ../fahrenheitFront
+    ports: 
+    - "7045:80"
+    networks:
+      - fahrenheit_network
+    depends_on:
+      - backend
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: Fahrenheit
+      PGDATA: /var/lib/postgresql/data/pgdata  
+
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./fahrenheit_dump.sql:/docker-entrypoint-initdb.d/fahrenheit_dump.sql
+      - ./Web/uploads:/app/
+      - ../nuget:/app/nuget
+    networks:
+      - fahrenheit_network
+    ports: 
+      - "5432:5432"
+
+networks:
+  fahrenheit_network:
+    external: true
+volumes:
+  db_data:
+    driver: local

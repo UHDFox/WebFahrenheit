@@ -15,6 +15,4 @@ public sealed class FeedbackRecord : IDataObject, IUserFeedback
     public string Message { get; set; } = "";
 
     public Guid UserId { get; set; }
-
-    public UserRecord? User { get; set; }
 }

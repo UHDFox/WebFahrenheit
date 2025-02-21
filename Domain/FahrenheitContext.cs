@@ -10,9 +10,6 @@ public class FahrenheitContext : DbContext
     public FahrenheitContext(DbContextOptions opts) : base(opts)
     {
     }
-
-    public DbSet<UserRecord> Users => Set<UserRecord>();
-
     public DbSet<FeedbackRecord> Feedbacks => Set<FeedbackRecord>();
 
     public DbSet<FireplaceRecord> Fireplaces => Set<FireplaceRecord>();
