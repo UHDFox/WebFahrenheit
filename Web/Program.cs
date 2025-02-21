@@ -68,10 +68,10 @@ builder.Services.AddJwtAuthentication();
 builder.Services.AddSerilog();
 builder.Configuration.AddEnvironmentVariables();
 builder.WebHost.UseUrls(builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5000");
-
 builder.Services.ConfigureCORSPolicy();
 
 var app = builder.Build();
+app.ApplyMigrations();
 app.UseCors("ApiCorsPolicy");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -79,7 +79,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseMiddleware<LoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();

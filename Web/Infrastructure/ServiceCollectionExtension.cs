@@ -1,3 +1,4 @@
+using System.Net;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -73,5 +74,22 @@ public static class ServiceCollectionExtension
             logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning); 
         });
     }
-    
+
+    public static void ApplyMigrations(this WebApplication app)
+    {
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                var dbContext = services.GetRequiredService<FahrenheitContext>();
+                dbContext.Database.Migrate(); 
+                Log.Logger.Information("Database migration applied successfully.");
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error($"An error occurred while applying the database migration: {ex.Message}");
+            }
+        }
+    }
 }

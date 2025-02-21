@@ -19,7 +19,6 @@ public sealed class UserController : Controller
     private readonly ILogger<UserController> _logger;
     private readonly IMapper mapper;
     private readonly IUserService userService;
-    //private readonly AuthClient client;
     
 
     public UserController(IUserService userService, IMapper mapper, ILogger<UserController> logger)
@@ -44,7 +43,7 @@ public sealed class UserController : Controller
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in GetListAsync");
+            _logger.LogError("Error in GetListAsync: {Message}", ex.Message);
             return StatusCode(500, "An error occurred while processing the request.");
         }
     }
