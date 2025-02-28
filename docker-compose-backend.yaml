@@ -5,6 +5,7 @@ services:
   backend:
     image: fahrenheitbackimage
     build:
+<<<<<<< Updated upstream
       context: ..
       dockerfile: /WebFahrenheit/Dockerfile
 =======
