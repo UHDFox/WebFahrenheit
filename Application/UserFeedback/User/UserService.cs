@@ -1,8 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using Application.Infrastructure.Authentication;
+﻿using Application.Infrastructure.Authentication;
 using Application.Infrastructure.Exceptions;
 using AutoMapper;
-using Contracts.Contracts.User;
+using FahrenheitAuthService.Contracts.Contracts.User;
 using Domain.Domain.Entities.Users;
 using FahrenheitAuthService.Client;
 using Microsoft.Extensions.Logging;

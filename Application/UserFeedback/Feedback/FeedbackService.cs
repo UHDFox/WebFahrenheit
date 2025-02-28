@@ -1,7 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using AutoMapper;
 using Domain.Domain.Entities.Users;
-using Domain.Domain.Enums;
 using FahrenheitAuthService.Client.Implemetations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;

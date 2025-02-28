@@ -15,11 +15,11 @@ COPY ./FahrenheitAuthService /app/FahrenheitAuthService
 
 
 # Добавляем этот путь как источник NuGet
-RUN mkdir -p /app/nuget
+
 RUN dotnet nuget add source /app/nuget --name DockerFahrenheitRepo
 
 RUN dotnet pack /app/FahrenheitAuthService/FahrenheitAuthService.Client/FahrenheitAuthService.Client.csproj --configuration Release --output /app/nuget /p:PackageVersion=1.0.0
-RUN dotnet pack /app/FahrenheitAuthService/src/Contracts/Contracts.csproj --configuration Release --output /app/nuget /p:PackageVersion=1.0.0
+RUN dotnet pack /app/FahrenheitAuthService/src/FahrenheitAuthService.Contracts/FahrenheitAuthService.Contracts.csproj --configuration Release --output /app/nuget /p:PackageVersion=1.0.0
 RUN dotnet restore
 
 RUN dotnet clean /app/Application/Application.csproj -c Release

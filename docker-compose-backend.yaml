@@ -5,13 +5,8 @@ services:
   backend:
     image: fahrenheitbackimage
     build:
-<<<<<<< Updated upstream
       context: ..
       dockerfile: /WebFahrenheit/Dockerfile
-=======
-      context: .
-      dockerfile: /Dockerfile
->>>>>>> Stashed changes
     ports: 
       - "5000:5000"
     depends_on:

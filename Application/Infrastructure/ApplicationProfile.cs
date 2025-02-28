@@ -5,11 +5,12 @@ using Application.Product.WaterBoiler;
 using Application.UserFeedback.Feedback;
 using Application.UserFeedback.User;
 using AutoMapper;
-using Contracts.Contracts.CommonResponses;
-using Contracts.Contracts.User;
+using FahrenheitAuthService.Contracts;
 using Domain.Domain.Entities.Products;
 using Domain.Domain.Entities.Users;
 using Domain.Domain.Enums;
+using FahrenheitAuthService.Contracts.Contracts.CommonResponses;
+using FahrenheitAuthService.Contracts.Contracts.User;
 
 namespace Application.Infrastructure;
 

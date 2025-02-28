@@ -2561,6 +2561,7 @@
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
+        "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\NuGet.Config",
         "C:\\Users\\000\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2568,9 +2569,7 @@
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "D:\\progs\\projects\\fahrenheit\\nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

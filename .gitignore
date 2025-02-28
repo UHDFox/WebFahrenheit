@@ -365,3 +365,11 @@ FodyWeavers.xsd
 
 uploads/
 /.obj/
+
+# Ignore temporary build files
+bin/
+obj/
+/bin/
+/obj/
+**/bin/
+**/obj/
