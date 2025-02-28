@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fahrenheitwebapi-deployment
+  namespace: fahrenheit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fahrenheitwebapi-pod
+  template:
+    metadata:
+      labels:
+        app: fahrenheitwebapi-pod
+    spec:
+      containers:
+      - name: fahrenheitwebapi-container
+        image: fahrenheitbackimage
+        ports: 
+          - containerPort: 80

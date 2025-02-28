@@ -9,8 +9,9 @@
       "Application/1.0.0": {
         "dependencies": {
           "AutoMapper": "13.0.1",
+          "Contracts": "1.0.1",
           "Domain": "1.0.0",
-          "FahrenheitAuthService.Client": "1.0.0",
+          "FahrenheitAuthService.Client": "1.0.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.10",
           "Microsoft.AspNetCore.OpenApi": "8.0.10",
           "Microsoft.EntityFrameworkCore": "8.0.10",
@@ -32,7 +33,7 @@
           }
         }
       },
-      "Contracts/1.0.0": {
+      "Contracts/1.0.1": {
         "runtime": {
           "lib/net8.0/Contracts.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -40,9 +41,9 @@
           }
         }
       },
-      "FahrenheitAuthService.Client/1.0.0": {
+      "FahrenheitAuthService.Client/1.0.1": {
         "dependencies": {
-          "Contracts": "1.0.0",
+          "Contracts": "1.0.1",
           "Serilog.Extensions.Logging": "9.0.0",
           "Serilog.Settings.Configuration": "9.0.0",
           "Serilog.Sinks.Async": "2.1.0",
@@ -605,19 +606,19 @@
       "path": "automapper/13.0.1",
       "hashPath": "automapper.13.0.1.nupkg.sha512"
     },
-    "Contracts/1.0.0": {
+    "Contracts/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-W0H+248sitdzpi1XXMpJGZfkNiAX4Rfcv22lwJsriu6TOmLnVqJ32ywkqi9VT450szmOcqoPq6pfFmQXruFvWQ==",
-      "path": "contracts/1.0.0",
-      "hashPath": "contracts.1.0.0.nupkg.sha512"
+      "sha512": "sha512-X7EGXCJGSgcJ7D+aWbsKr6G+dfsjLLJ4eyI4ufEqOBUZJeaR1Z+/zDOICxHH53LOgBTNzrzf8k+M8/PLgB3tmA==",
+      "path": "contracts/1.0.1",
+      "hashPath": "contracts.1.0.1.nupkg.sha512"
     },
-    "FahrenheitAuthService.Client/1.0.0": {
+    "FahrenheitAuthService.Client/1.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+o9OOqXvRuuaGYa9pM+j1TjrcnaUgfmBr/15Sh62iBUcMM90ukzIa3UoNhTWGdTE8Kqhq+WefOn6dfvG2xwH0Q==",
-      "path": "fahrenheitauthservice.client/1.0.0",
-      "hashPath": "fahrenheitauthservice.client.1.0.0.nupkg.sha512"
+      "sha512": "sha512-OLaiDjnFjSYVIeH4AhJvc//eNc/AC9ebWT2GdhnNuWjDpiH71vI2x3UAtYuKw5cf2tOvzXhTQjA19J85KOQR+A==",
+      "path": "fahrenheitauthservice.client/1.0.1",
+      "hashPath": "fahrenheitauthservice.client.1.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.10": {
       "type": "package",

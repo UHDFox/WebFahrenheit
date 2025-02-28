@@ -1,0 +1,18 @@
+# Ignore build directories
+bin/
+obj/
+
+# Ignore temporary files
+*.log
+*.tmp
+
+# Ignore git-related files
+.git/
+
+# Ignore other IDE or user-specific files
+.vscode/
+.idea/
+
+# Ignore Docker-related files
+Dockerfile*
+.dockerignore
