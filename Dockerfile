@@ -1,41 +1,44 @@
+# Стадия 1: Сборка и восстановление зависимостей
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /app
 
-COPY ./WebFahrenheit/Web/Web.csproj /app/Web/
-COPY ./WebFahrenheit/Domain/Domain.csproj /app/Domain/
-COPY ./WebFahrenheit/Application/Application.csproj /app/Application/
-COPY ./WebFahrenheit/Repository/Repository.csproj /app/Repository/
-COPY ./FahrenheitAuthService/src/Web/Web.csproj /app/FahrenheitAuthService/src/Web/Web.csproj
+# Копируем проекты и зависимости
+COPY ./Web/Web.csproj /app/Web/
+COPY ./Domain/Domain.csproj /app/Domain/
+COPY ./Application/Application.csproj /app/Application/
+COPY ./Repository/Repository.csproj /app/Repository/
 
+# Копируем NuGet.config
+COPY ./NuGet.config /app/NuGet.config
 
-COPY ./WebFahrenheit ./
-COPY ./FahrenheitAuthService /app/FahrenheitAuthService
+COPY . .
 
+# Восстанавливаем зависимости, используя GitHub Packages
+RUN dotnet restore /app/Web/Web.csproj 
+RUN dotnet restore /app/Application/Application.csproj
+RUN dotnet restore /app/Domain/Domain.csproj
+RUN dotnet restore /app/Repository/Repository.csproj 
 
-
-# Добавляем этот путь как источник NuGet
-
-RUN dotnet nuget add source /app/nuget --name DockerFahrenheitRepo
-
-RUN dotnet pack /app/FahrenheitAuthService/FahrenheitAuthService.Client/FahrenheitAuthService.Client.csproj --configuration Release --output /app/nuget /p:PackageVersion=1.0.0
-RUN dotnet pack /app/FahrenheitAuthService/src/FahrenheitAuthService.Contracts/FahrenheitAuthService.Contracts.csproj --configuration Release --output /app/nuget /p:PackageVersion=1.0.0
-RUN dotnet restore
-
+# Очищаем старые сборки
 RUN dotnet clean /app/Application/Application.csproj -c Release
 RUN dotnet clean /app/Domain/Domain.csproj -c Release
 RUN dotnet clean /app/Repository/Repository.csproj -c Release
 RUN dotnet clean /app/Web/Web.csproj -c Release
 
-
-
+# Собираем и публикуем веб-приложение
 RUN dotnet publish /app/Web/Web.csproj -c Release -o /Release
+RUN ls -l /Release
 
+
+
+# Стадия 2: Финальный образ для веб-приложения
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
 WORKDIR /app
 
+# Копируем опубликованные файлы веб-приложения
 COPY --from=build /Release .
 
+# Точка входа
 ENTRYPOINT ["dotnet", "Web.dll"]
-
