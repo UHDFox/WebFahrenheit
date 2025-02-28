@@ -6,6 +6,8 @@ D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Web.runtimeconfi
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Web.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Web.pdb
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\AutoMapper.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Contracts.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\FahrenheitAuthService.Client.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Humanizer.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
@@ -21,6 +23,7 @@ D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Entity
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
@@ -43,6 +46,12 @@ D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.OpenAp
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Mono.TextTemplating.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Npgsql.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.Async.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.File.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -52,6 +61,7 @@ D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Compositi
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Composition.Hosting.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Composition.Runtime.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Composition.TypedParts.dll
+D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.IO.Pipelines.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Text.Encodings.Web.dll
@@ -137,13 +147,3 @@ D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\refint\Web.dll
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\Web.pdb
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\Web.genruntimeconfig.cache
 D:\progs\projects\fahrenheit\WebFahrenheit\Web\obj\Debug\net8.0\ref\Web.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.Async.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.Console.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Sinks.File.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\Contracts.dll
-D:\progs\projects\fahrenheit\WebFahrenheit\Web\bin\Debug\net8.0\FahrenheitAuthService.Client.dll

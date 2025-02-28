@@ -13,8 +13,8 @@
         "packagesPath": "C:\\Users\\000\\.nuget\\packages\\",
         "outputPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Application\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
+          "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\NuGet.Config",
           "C:\\Users\\000\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -22,10 +22,9 @@
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\progs\\projects\\fahrenheit\\nuget": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/UHDFox/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -60,9 +59,13 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "Contracts": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
             "FahrenheitAuthService.Client": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.0.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -110,8 +113,8 @@
         "packagesPath": "C:\\Users\\000\\.nuget\\packages\\",
         "outputPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
+          "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\NuGet.Config",
           "C:\\Users\\000\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -119,10 +122,9 @@
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\progs\\projects\\fahrenheit\\nuget": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/UHDFox/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -198,8 +200,8 @@
         "packagesPath": "C:\\Users\\000\\.nuget\\packages\\",
         "outputPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Repository\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
+          "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\NuGet.Config",
           "C:\\Users\\000\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -207,10 +209,9 @@
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\progs\\projects\\fahrenheit\\nuget": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/UHDFox/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -272,8 +273,8 @@
         "packagesPath": "C:\\Users\\000\\.nuget\\packages\\",
         "outputPath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Web\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
+          "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\NuGet.Config",
           "C:\\Users\\000\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -281,10 +282,9 @@
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\progs\\projects\\fahrenheit\\nuget": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/UHDFox/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -328,8 +328,6 @@
               "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.10, )"
             },

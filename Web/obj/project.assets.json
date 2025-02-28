@@ -18,7 +18,7 @@
           }
         }
       },
-      "Contracts/1.0.0": {
+      "Contracts/1.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Contracts.dll": {}
@@ -27,10 +27,10 @@
           "lib/net8.0/Contracts.dll": {}
         }
       },
-      "FahrenheitAuthService.Client/1.0.0": {
+      "FahrenheitAuthService.Client/1.0.1": {
         "type": "package",
         "dependencies": {
-          "Contracts": "1.0.0",
+          "Contracts": "1.0.1",
           "Serilog.Extensions.Logging": "9.0.0",
           "Serilog.Settings.Configuration": "9.0.0",
           "Serilog.Sinks.Async": "2.1.0",
@@ -47,7 +47,7 @@
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/Humanizer.dll": {
             "related": ".xml"
           }
         },
@@ -98,7 +98,7 @@
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.1/_._": {
+          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
             "related": ".xml"
           }
         },
@@ -124,7 +124,7 @@
           "System.Text.Encoding.CodePages": "6.0.0"
         },
         "compile": {
-          "lib/netcoreapp3.1/_._": {
+          "lib/netcoreapp3.1/Microsoft.CodeAnalysis.dll": {
             "related": ".pdb;.xml"
           }
         },
@@ -181,7 +181,7 @@
           "Microsoft.CodeAnalysis.Common": "[4.5.0]"
         },
         "compile": {
-          "lib/netcoreapp3.1/_._": {
+          "lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.dll": {
             "related": ".pdb;.xml"
           }
         },
@@ -241,7 +241,7 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.5.0]"
         },
         "compile": {
-          "lib/netcoreapp3.1/_._": {
+          "lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.Workspaces.dll": {
             "related": ".pdb;.xml"
           }
         },
@@ -303,7 +303,7 @@
           "System.Threading.Channels": "6.0.0"
         },
         "compile": {
-          "lib/netcoreapp3.1/_._": {
+          "lib/netcoreapp3.1/Microsoft.CodeAnalysis.Workspaces.dll": {
             "related": ".pdb;.xml"
           }
         },
@@ -408,7 +408,7 @@
           "Mono.TextTemplating": "2.2.1"
         },
         "compile": {
-          "lib/net8.0/_._": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll": {
             "related": ".xml"
           }
         },
@@ -897,7 +897,7 @@
           "System.CodeDom": "4.4.0"
         },
         "compile": {
-          "lib/netstandard2.0/_._": {}
+          "lib/netstandard2.0/Mono.TextTemplating.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
@@ -1103,7 +1103,7 @@
       "System.CodeDom/4.4.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.0/_._": {
+          "ref/netstandard2.0/System.CodeDom.dll": {
             "related": ".xml"
           }
         },
@@ -1117,7 +1117,7 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Collections.Immutable.dll": {
             "related": ".xml"
           }
         },
@@ -1146,7 +1146,7 @@
       "System.Composition.AttributedModel/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Composition.AttributedModel.dll": {
             "related": ".xml"
           }
         },
@@ -1165,7 +1165,7 @@
           "System.Composition.AttributedModel": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Composition.Convention.dll": {
             "related": ".xml"
           }
         },
@@ -1184,7 +1184,7 @@
           "System.Composition.Runtime": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Composition.Hosting.dll": {
             "related": ".xml"
           }
         },
@@ -1200,7 +1200,7 @@
       "System.Composition.Runtime/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Composition.Runtime.dll": {
             "related": ".xml"
           }
         },
@@ -1221,7 +1221,7 @@
           "System.Composition.Runtime": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Composition.TypedParts.dll": {
             "related": ".xml"
           }
         },
@@ -1296,7 +1296,7 @@
           "System.Collections.Immutable": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Reflection.Metadata.dll": {
             "related": ".xml"
           }
         },
@@ -1312,7 +1312,7 @@
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
             "related": ".xml"
           }
         },
@@ -1331,7 +1331,7 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Text.Encoding.CodePages.dll": {
             "related": ".xml"
           }
         },
@@ -1395,7 +1395,7 @@
       "System.Threading.Channels/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/System.Threading.Channels.dll": {
             "related": ".xml"
           }
         },
@@ -1413,8 +1413,9 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "AutoMapper": "13.0.1",
+          "Contracts": "1.0.1",
           "Domain": "1.0.0",
-          "FahrenheitAuthService.Client": "1.0.0",
+          "FahrenheitAuthService.Client": "1.0.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.10",
           "Microsoft.AspNetCore.OpenApi": "8.0.10",
           "Microsoft.EntityFrameworkCore": "8.0.10",
@@ -1476,24 +1477,24 @@
         "lib/net6.0/AutoMapper.xml"
       ]
     },
-    "Contracts/1.0.0": {
-      "sha512": "W0H+248sitdzpi1XXMpJGZfkNiAX4Rfcv22lwJsriu6TOmLnVqJ32ywkqi9VT450szmOcqoPq6pfFmQXruFvWQ==",
+    "Contracts/1.0.1": {
+      "sha512": "X7EGXCJGSgcJ7D+aWbsKr6G+dfsjLLJ4eyI4ufEqOBUZJeaR1Z+/zDOICxHH53LOgBTNzrzf8k+M8/PLgB3tmA==",
       "type": "package",
-      "path": "contracts/1.0.0",
+      "path": "contracts/1.0.1",
       "files": [
         ".nupkg.metadata",
-        "contracts.1.0.0.nupkg.sha512",
+        "contracts.1.0.1.nupkg.sha512",
         "contracts.nuspec",
         "lib/net8.0/Contracts.dll"
       ]
     },
-    "FahrenheitAuthService.Client/1.0.0": {
-      "sha512": "+o9OOqXvRuuaGYa9pM+j1TjrcnaUgfmBr/15Sh62iBUcMM90ukzIa3UoNhTWGdTE8Kqhq+WefOn6dfvG2xwH0Q==",
+    "FahrenheitAuthService.Client/1.0.1": {
+      "sha512": "OLaiDjnFjSYVIeH4AhJvc//eNc/AC9ebWT2GdhnNuWjDpiH71vI2x3UAtYuKw5cf2tOvzXhTQjA19J85KOQR+A==",
       "type": "package",
-      "path": "fahrenheitauthservice.client/1.0.0",
+      "path": "fahrenheitauthservice.client/1.0.1",
       "files": [
         ".nupkg.metadata",
-        "fahrenheitauthservice.client.1.0.0.nupkg.sha512",
+        "fahrenheitauthservice.client.1.0.1.nupkg.sha512",
         "fahrenheitauthservice.client.nuspec",
         "lib/net8.0/FahrenheitAuthService.Client.dll"
       ]
@@ -3832,6 +3833,7 @@
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
+        "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\NuGet.Config",
         "C:\\Users\\000\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3839,10 +3841,9 @@
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "D:\\progs\\projects\\fahrenheit\\nuget": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.pkg.github.com/UHDFox/index.json": {}
       },
       "frameworks": {
         "net8.0": {
@@ -3886,8 +3887,6 @@
             "version": "[8.0.10, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
-            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-            "suppressParent": "All",
             "target": "Package",
             "version": "[8.0.10, )"
           },

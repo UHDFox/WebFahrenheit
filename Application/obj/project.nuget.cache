@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "2Impytqw+3o=",
+  "dgSpecHash": "0/8GaSXAWws=",
   "success": true,
   "projectFilePath": "D:\\progs\\projects\\fahrenheit\\WebFahrenheit\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\000\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
-    "C:\\Users\\000\\.nuget\\packages\\contracts\\1.0.0\\contracts.1.0.0.nupkg.sha512",
-    "C:\\Users\\000\\.nuget\\packages\\fahrenheitauthservice.client\\1.0.0\\fahrenheitauthservice.client.1.0.0.nupkg.sha512",
+    "C:\\Users\\000\\.nuget\\packages\\contracts\\1.0.1\\contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\000\\.nuget\\packages\\fahrenheitauthservice.client\\1.0.1\\fahrenheitauthservice.client.1.0.1.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.10\\microsoft.aspnetcore.authentication.jwtbearer.8.0.10.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.10\\microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",
     "C:\\Users\\000\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.10\\microsoft.entityframeworkcore.8.0.10.nupkg.sha512",
